@@ -12,10 +12,12 @@ from email.mime.multipart import MIMEMultipart
 THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
 ASSETS = THIS_DIR / "assets"
+
 PROFIL = ASSETS / "profile-pic.png"
 CV = ASSETS / "CHABRIER_Léo_Curriculum_Vitae.pdf"
 DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
 LOTTIE_ANIMATION = ASSETS / "hello-october.json"
+PROJECTS_BREAKDOWNS = ASSETS / "projects"
 
 class Main_Interface():
     def __init__(self):
@@ -372,7 +374,6 @@ class Projects_Breakdowns():
                     expander = st.expander("Details : ", expanded=False)
                     with expander:
                         st.caption(project_description)
-
 
 class Coding_Dev():
     def create_panel(self):
