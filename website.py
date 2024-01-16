@@ -340,7 +340,6 @@ class Demoreels_Widget():
 class Projects_Breakdowns():
     def create_panel(self):
         st.header('_PROJECTS BREAKDOWNS_ :', divider='red')
-        # Dictionary with years as keys and lists of dictionaries (name and description) as values
         projects_data = {
             "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production"}],
             "2023": [{"name": "Langor short film", "description": "One year production, actually not available, ESMA propriety."}],
