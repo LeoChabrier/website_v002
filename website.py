@@ -389,6 +389,7 @@ class Coding_Dev():
             for col, project in zip(column_sets, projects):
                 with col:
                     st.title(project)
+                    
 
 if __name__ == "__main__":
     main_app = Main_Interface()
