@@ -8,11 +8,11 @@ import streamlit_option_menu as stop
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import os
 
 THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
 ASSETS = THIS_DIR / "assets"
-
 PROFIL = ASSETS / "profile-pic.png"
 CV = ASSETS / "CHABRIER_Léo_Curriculum_Vitae.pdf"
 DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
@@ -343,10 +343,15 @@ class Projects_Breakdowns():
     def create_panel(self):
         st.header('_PROJECTS BREAKDOWNS_ :', divider='red')
         projects_data = {
-            "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production"}],
-            "2023": [{"name": "Langor short film", "description": "One year production, actually not available, ESMA propriety."}],
+            "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production"},
+                    {"name": "An old friend", "description": "Single image rendered with Unreal Engine, focused on lighting and composition, using Megascans and Sketchfab assets."},
+                    {"name": "The mines of Mandalore", "description": "First ever animation sequence rendered with Unreal Engine. Discovering of level sequencer, render layers, aovs in Unreal. Compositing in NukeX."},
+                    {"name": "Discovering", "description": "Discovering of Unreal Engine rendering sytem for animation. More an experimentation than a real project. Assets from Sketchfab and Megascans."}],
+            "2023": [{"name": "Langor short film", "description": """
+                      One year production, actually not available, ESMA property.
+                        Made with Yannis Clerima, Sam Moriceau, Guillaume Boeuf-Couëron, Roxelane Guilbaud, Eve Bermond-Gonnet, Solène Lablonde and Marianne Autret !"""}],
             "2022": [{"name": "Madmax Motorcycle", "description": "Modeling, texturing, shading, showroom and VFX integration of a vehicle. This project was useful to learn about Mari, Nuke camera tracking and match move, grading, and CG elements integration."},
-                     {"name": "Self-Portrait", "description": "Self portrait, initialy captured using RealityCapture, then cleaned in Zbrush, retopologized in Maya, sculpted again in Zbrush, textured in Mari, groomed in Houdini, and rendered with Maya and Renderman."},
+                     {"name": "Self-Portrait", "description": "Self portrait, initially captured using RealityCapture, then cleaned in Zbrush, retopologized in Maya, sculpted again in Zbrush, textured in Mari, groomed in Houdini, and rendered with Maya and Renderman."},
                      {"name": "Claws of Nights", "description": ""}],
             "2021": [{"name": "The insect", "description": ""},
                      {"name": "The timelapse", "description": ""},
@@ -369,7 +374,27 @@ class Projects_Breakdowns():
                 with col:
                     project_name = project_info["name"]
                     project_description = project_info["description"]
+                    image_extensions = [".jpg", ".png"]
+                    image_found = False
+                    for ext in image_extensions:
+                        image_path = str(PROJECTS_BREAKDOWNS / project_name / f"{project_name} 01{ext}")
+                        if os.path.exists(image_path):
+                            image = Image.open(image_path)
+                            image.resize((475, 670))
+                            st.image(image, use_column_width="always")
+                            image_found = True
+                            break
+                    if not image_found:
+                        gray_image = Image.new("RGB", (1920, 1080), (169, 169, 169))
+                        st.image(gray_image, use_column_width="always")
 
+                    hide_img_fs = '''
+                        <style>
+                        button[title="View fullscreen"]{
+                            visibility: hidden;}
+                        </style>
+                        '''
+                    st.markdown(hide_img_fs, unsafe_allow_html=True)
                     st.text(project_name)
                     expander = st.expander("Details : ", expanded=False)
                     with expander:
@@ -389,7 +414,6 @@ class Coding_Dev():
             for col, project in zip(column_sets, projects):
                 with col:
                     st.title(project)
-
 
 if __name__ == "__main__":
     main_app = Main_Interface()
