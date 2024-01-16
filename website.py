@@ -345,7 +345,7 @@ class Projects_Breakdowns():
             "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production"}],
             "2023": [{"name": "Langor short film", "description": "One year production, actually not available, ESMA propriety."}],
             "2022": [{"name": "Madmax Motorcycle", "description": "Modeling, texturing, shading, showroom and VFX integration of a vehicle. This project was useful to learn about Mari, Nuke camera tracking and match move, grading, and CG elements integration."},
-                     {"name": "Self-Portrait", "description": ""},
+                     {"name": "Self-Portrait", "description": "Self portrait, initialy captured using RealityCapture, then cleaned in Zbrush, retopologized in Maya, sculpted again in Zbrush, textured in Mari, groomed in Houdini, and rendered with Maya and Renderman."},
                      {"name": "Claws of Nights", "description": ""}],
             "2021": [{"name": "The insect", "description": ""},
                      {"name": "The timelapse", "description": ""},
@@ -389,7 +389,7 @@ class Coding_Dev():
             for col, project in zip(column_sets, projects):
                 with col:
                     st.title(project)
-                    
+
 
 if __name__ == "__main__":
     main_app = Main_Interface()
