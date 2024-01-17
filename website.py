@@ -9,6 +9,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
+import streamlit.components.v1 as components
 
 THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
@@ -18,6 +19,11 @@ CV = ASSETS / "CHABRIER_Léo_Curriculum_Vitae.pdf"
 DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
 LOTTIE_ANIMATION = ASSETS / "hello-october.json"
 PROJECTS_BREAKDOWNS = ASSETS / "projects"
+
+# https://discuss.streamlit.io/t/automatic-slideshow/38342/5
+# https://github.com/haltakov/simple-photo-gallery/blob/master/README.md
+# https://forum.mendix.com/link/space/app-development/questions/104660
+# https://medium.com/allenhwkim/close-div-when-clicking-outside-it-97255c20a221
 
 class Main_Interface():
     def __init__(self):
@@ -250,6 +256,14 @@ class AboutMe_Widgets():
         """
         )
 
+        hide_img_fs = '''
+                        <style>
+                        button[title="View fullscreen"]{
+                            visibility: hidden;}
+                        </style>
+                        '''
+        st.markdown(hide_img_fs, unsafe_allow_html=True)
+
 class GetInTouch_Widgets():
     def create_panel(self):
 
@@ -380,7 +394,6 @@ class Projects_Breakdowns():
                         image_path = str(PROJECTS_BREAKDOWNS / project_name / f"{project_name} 01{ext}")
                         if os.path.exists(image_path):
                             image = Image.open(image_path)
-                            image.resize((475, 670))
                             st.image(image, use_column_width="always")
                             image_found = True
                             break
@@ -388,13 +401,26 @@ class Projects_Breakdowns():
                         gray_image = Image.new("RGB", (1920, 1080), (169, 169, 169))
                         st.image(gray_image, use_column_width="always")
 
-                    hide_img_fs = '''
+                    # hide_img_fs = '''
+                    #     <style>
+                    #     button[title="View fullscreen"]{
+                    #         visibility: hidden;}
+                    #     </style>
+                    #     '''
+                    # st.markdown(hide_img_fs, unsafe_allow_html=True)
+                    st.markdown(
+                        """
                         <style>
-                        button[title="View fullscreen"]{
-                            visibility: hidden;}
+                            button[title^=Exit]+div [data-testid=stImage]{
+                                text-align: center;
+                                display: block;
+                                margin-left: auto;
+                                margin-right: auto;
+                                width: 100%;
+                            }
                         </style>
-                        '''
-                    st.markdown(hide_img_fs, unsafe_allow_html=True)
+                        """, unsafe_allow_html=True
+                    )
                     st.text(project_name)
                     expander = st.expander("Details : ", expanded=False)
                     with expander:
