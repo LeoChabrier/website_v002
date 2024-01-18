@@ -16,11 +16,10 @@ THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
 ASSETS = THIS_DIR / "assets"
 PROFIL = ASSETS / "profile-pic.png"
-
 CV = ASSETS / "CHABRIER_Léo_Curriculum_Vitae.pdf"
 DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
 LOTTIE_ANIMATION = ASSETS / "hello-october.json"
-PROJECTS_BREAKDOWNS = ASSETS / "achievements"
+PROJECTS_BREAKDOWNS = ASSETS / "projects"
 
 # https://discuss.streamlit.io/t/automatic-slideshow/38342/5
 # https://github.com/haltakov/simple-photo-gallery/blob/master/README.md
@@ -355,19 +354,72 @@ class Demoreels_Widget():
         st.video(video_bytes)
 
 class Projects_Breakdowns():
+    def __init__(self):
+        super().__init__()
+        self.images = []
     def create_panel(self):
         st.header('_PROJECTS BREAKDOWNS_ :', divider='red')
-        project_date = os.listdir(PROJECTS_BREAKDOWNS)
-        project_date.reverse()
-        for year in project_date :
+        projects_data = {
+            "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production."}
+                    ],
+            "2023": [{"name": "Langor short film", "description": """
+                      One year production, actually not available, ESMA property.
+                        Made with Yannis Clerima, Sam Moriceau, Guillaume Boeuf-Couëron, Roxelane Guilbaud, Eve Bermond-Gonnet, Solène Lablonde and Marianne Autret !"""},
+                    {"name": "Discovering", "description": "Discovering of Unreal Engine rendering sytem for animation. More an experimentation than a real project. Assets from Sketchfab and Megascans."},
+                    {"name": "The mines of Mandalore", "description": "First ever animation sequence rendered with Unreal Engine. Discovering of level sequencer, render layers, aovs in Unreal. Compositing in NukeX."},
+                    {"name": "An old friend", "description": "Single image rendered with Unreal Engine, focused on lighting and composition, using Megascans and Sketchfab assets."},
+                        
+                        ],
+
+            "2022": [{"name": "Rolling Teapot", "description": "Texturing exercice made using Renderman Teapot, a good way to learn texturing in Mari and photorealistic integration."},
+                     {"name": "Madmax Motorcycle", "description": "Modeling, texturing, shading, showroom and VFX integration of a vehicle. This project was useful to learn about Mari, Nuke camera tracking and match move, grading, and CG elements integration."},
+                     {"name": "Self-Portrait", "description": "Self portrait, initially captured using RealityCapture, then cleaned in Zbrush, retopologized in Maya, sculpted again in Zbrush, textured in Mari, groomed in Houdini, and rendered with Maya and Renderman."},
+                     {"name": "Claws of Nights", "description": """6 weeks production project, made with Jérémie Lebuffe, Manon François, Eve Bermond-Gonnet, Killian Derlin and Emeline Le Fevre.
+                      I've been mostly working on lighting/texturing, compositing and fx !"""}],
+            "2021": [{"name": "The insect", "description": ""},
+                     {"name": "The timelapse", "description": ""},
+                     {"name": "Camera Mapping", "description": ""},
+                     {"name": "Anguerran Declin's shop", "description": ""}],
+            "2020": [
+                     {"name": "Breakfast", "description": ""},
+                     {"name": "Living room", "description": ""},
+                     {"name": "The film set", "description": ""},
+                     {"name": "The hero's lair", "description": ""}],
+
+            "2019": [{"name": "Christmas Project", "description": ""},
+                     {"name": "Still Life", "description": ""}]
+        }
+
+        for year, projects in projects_data.items():
             st.subheader(f'_{year}_ :', divider='red')
             column_sets = st.columns(4)
-            current_year = os.path.join(PROJECTS_BREAKDOWNS, year)
-            for col, project in zip(column_sets, os.listdir(current_year)) :
+
+            for col, project_info in zip(column_sets, projects):
                 with col:
-                    gray_image = Image.new("RGB", (384, 216))
-                    st.image(gray_image, use_column_width="always")
-                    st.button(project, key = f"button{project}")
+                    project_name = project_info["name"]
+                    project_description = project_info["description"]
+                    image_extensions = [".jpg", ".png"]
+                    image_found = False
+                    for ext in image_extensions:
+                        image_path = str(PROJECTS_BREAKDOWNS / project_name / f"{project_name} 01{ext}")
+                        if os.path.exists(image_path):
+                            image = Image.open(image_path)
+                            st.image(image, use_column_width="always")
+                            image_found = True
+                            break
+                    if not image_found:
+                        gray_image = Image.new("RGB", (384, 216))
+                        st.image(gray_image, use_column_width="always")
+
+                    hide_img_fs = '''
+                        <style>
+                        button[title="View fullscreen"]{
+                            visibility: hidden;}
+                        </style>
+                        '''
+                    st.markdown(hide_img_fs, unsafe_allow_html=True)
+                    st.button(project_name, key = f"button{project_name}")
+                    
                     st.markdown(
                         """
                         <style>
@@ -379,80 +431,6 @@ class Projects_Breakdowns():
                         """,
                         unsafe_allow_html=True,
                     )
-        
-
-        # projects_data = {
-        #     "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production."}
-        #             ],
-        #     "2023": [{"name": "Langor short film", "description": """
-        #               One year production, actually not available, ESMA property.
-        #                 Made with Yannis Clerima, Sam Moriceau, Guillaume Boeuf-Couëron, Roxelane Guilbaud, Eve Bermond-Gonnet, Solène Lablonde and Marianne Autret !"""},
-        #             {"name": "Discovering", "description": "Discovering of Unreal Engine rendering sytem for animation. More an experimentation than a real project. Assets from Sketchfab and Megascans."},
-        #             {"name": "The mines of Mandalore", "description": "First ever animation sequence rendered with Unreal Engine. Discovering of level sequencer, render layers, aovs in Unreal. Compositing in NukeX."},
-        #             {"name": "An old friend", "description": "Single image rendered with Unreal Engine, focused on lighting and composition, using Megascans and Sketchfab assets."},
-                        
-        #                 ],
-
-        #     "2022": [{"name": "Rolling Teapot", "description": "Texturing exercice made using Renderman Teapot, a good way to learn texturing in Mari and photorealistic integration."},
-        #              {"name": "Madmax Motorcycle", "description": "Modeling, texturing, shading, showroom and VFX integration of a vehicle. This project was useful to learn about Mari, Nuke camera tracking and match move, grading, and CG elements integration."},
-        #              {"name": "Self-Portrait", "description": "Self portrait, initially captured using RealityCapture, then cleaned in Zbrush, retopologized in Maya, sculpted again in Zbrush, textured in Mari, groomed in Houdini, and rendered with Maya and Renderman."},
-        #              {"name": "Claws of Nights", "description": """6 weeks production project, made with Jérémie Lebuffe, Manon François, Eve Bermond-Gonnet, Killian Derlin and Emeline Le Fevre.
-        #               I've been mostly working on lighting/texturing, compositing and fx !"""}],
-        #     "2021": [{"name": "The insect", "description": ""},
-        #              {"name": "The timelapse", "description": ""},
-        #              {"name": "Camera Mapping", "description": ""},
-        #              {"name": "Anguerran Declin's shop", "description": ""}],
-        #     "2020": [
-        #              {"name": "Breakfast", "description": ""},
-        #              {"name": "Living room", "description": ""},
-        #              {"name": "The film set", "description": ""},
-        #              {"name": "The hero's lair", "description": ""}],
-
-        #     "2019": [{"name": "Christmas Project", "description": ""},
-        #              {"name": "Still Life", "description": ""}]
-        # }
-
-        # for year, projects in projects_data.items():
-        #     st.subheader(f'_{year}_ :', divider='red')
-        #     column_sets = st.columns(4)
-
-        #     for col, project_info in zip(column_sets, projects):
-        #         with col:
-        #             project_name = project_info["name"]
-        #             project_description = project_info["description"]
-        #             image_extensions = [".jpg", ".png"]
-        #             image_found = False
-        #             for ext in image_extensions:
-        #                 image_path = str(PROJECTS_BREAKDOWNS / project_name / f"{project_name} 01{ext}")
-        #                 if os.path.exists(image_path):
-        #                     image = Image.open(image_path)
-        #                     st.image(image, use_column_width="always")
-        #                     image_found = True
-        #                     break
-        #             if not image_found:
-        #                 gray_image = Image.new("RGB", (384, 216))
-        #                 st.image(gray_image, use_column_width="always")
-
-        #             hide_img_fs = '''
-        #                 <style>
-        #                 button[title="View fullscreen"]{
-        #                     visibility: hidden;}
-        #                 </style>
-        #                 '''
-        #             st.markdown(hide_img_fs, unsafe_allow_html=True)
-        #             st.button(project_name, key = f"button{project_name}")
-                    
-        #             st.markdown(
-        #                 """
-        #                 <style>
-        #                 div.stButton > button {
-        #                     display: block;
-        #                     margin: auto;
-        #                 }
-        #                 </style>
-        #                 """,
-        #                 unsafe_allow_html=True,
-        #             )
 
         
 class Coding_Dev():
