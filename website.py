@@ -167,7 +167,7 @@ class AboutMe_Widgets():
             - ✔️ Good mastery of UI design with Qt Designer/PySide2/PyQt5/TKinter, Streamlit.
             - ✔️ AI development in Autodesk Maya, Nuke and Houdini with OpenAi API and Whisper. 
             - ✔️ Strong understanding on lots of 3D softwares, ability to resolve major technical problems.
-            - ✔️ Basic knowledges of C++, HTML, CSS.
+            - ✔️ Basic knowledges of C++, HTML, CSS, JavaScript.
             """
             )
         
