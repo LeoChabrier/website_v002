@@ -3,13 +3,12 @@
 
 
 # IMAGES = [
-#     r"C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 01.png",
-#     r"C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 02.JPG",
+#     "C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 01.png",
+#     "C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 02.JPG",
 #     "https://unsplash.com/photos/zVhYcSjd7-Q/download?force=true&w=1920",
 #     "https://unsplash.com/photos/S5uIITJDq8Y/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTAzMzAz&force=true&w=1920",
 #     "https://unsplash.com/photos/E4bmf8BtIBE/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTEzMzAw&force=true&w=1920",
 # ]
-
 
 
 # def slideshow_swipeable(images):
@@ -54,7 +53,6 @@
 
 # if __name__ == '__main__':
 #     st.title("Streamlit Elements Slideshow")
-
 #     st.subheader("Swipeable slideshow")
 #     slideshow_swipeable(IMAGES)
 
@@ -200,8 +198,8 @@
 # from PIL import Image
 
 # IMAGES = [
-#     r"C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 01.png",
-#     r"C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 02.JPG",
+#     "assets/projects/Langor short film/Langor short film 01.png",
+#     "assets/projects/Langor short film/Langor short film 02.JPG",
 #     "https://unsplash.com/photos/zVhYcSjd7-Q/download?force=true&w=1920",
 #     "https://unsplash.com/photos/S5uIITJDq8Y/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTAzMzAz&force=true&w=1920",
 #     "https://unsplash.com/photos/E4bmf8BtIBE/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTEzMzAw&force=true&w=1920",
@@ -219,15 +217,15 @@
 
 # if __name__ == '__main__':
 #     st.title("Streamlit Image Slideshow")
-
 #     index = st.slider("Select Image", 0, len(IMAGES) - 1, 0)
 #     display_images(IMAGES, index)
+    
 # import streamlit as st
 # from PIL import Image
 
 # IMAGES = [
-#     r"C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 01.png",
-#     r"C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 02.JPG",
+#     "assets/projects/Langor short film/Langor short film 01.png",
+#     "assets/projects/Langor short film/Langor short film 02.JPG",
 #     "https://unsplash.com/photos/zVhYcSjd7-Q/download?force=true&w=1920",
 #     "https://unsplash.com/photos/S5uIITJDq8Y/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTAzMzAz&force=true&w=1920",
 #     "https://unsplash.com/photos/E4bmf8BtIBE/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTEzMzAw&force=true&w=1920",
@@ -252,8 +250,8 @@
 # from io import BytesIO
 
 # IMAGES = [
-#     r"C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 01.png",
-#     r"C:/Users/jdslo/OneDrive/Bureau/website/assets/projects/Langor short film/Langor short film 02.JPG",
+#     "assets/projects/Langor short film/Langor short film 01.png",
+#     "assets/projects/Langor short film/Langor short film 02.JPG",
 #     "https://unsplash.com/photos/zVhYcSjd7-Q/download?force=true&w=1920",
 #     "https://unsplash.com/photos/S5uIITJDq8Y/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTAzMzAz&force=true&w=1920",
 #     "https://unsplash.com/photos/E4bmf8BtIBE/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTEzMzAw&force=true&w=1920",
@@ -294,61 +292,6 @@
 
 
 
-# import streamlit as st
-# from PIL import Image
-# import base64
-# from io import BytesIO
-
-# def main():
-#     st.title("Sliding Image App")
-
-#     # Check if the user has clicked on the image button
-#     is_clicked = st.button("🖼️ Show Image", key="image_button")
-
-#     # Display the image based on the click
-#     if is_clicked:
-#         show_image()
-
-# def show_image():
-#     # Path to your image file
-#     image_path = r"C:\Users\jdslo\OneDrive\Bureau\website\langor_seq06_Sh250.png"
-
-#     # Open the image using PIL
-#     image = Image.open(image_path)
-
-#     # Convert the image to a base64-encoded string
-#     buffered = BytesIO()
-#     image.save(buffered, format="PNG")
-#     image_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
-
-#     # Custom HTML and CSS to create a sliding image from the center
-#     html_code = f"""
-#         <style>
-#             .sliding-image {{
-#                 position: fixed;
-#                 top: 50%;
-#                 left: 50%;
-#                 transform: translate(-50%, -50%) scale(1);
-#                 max-width: 100%;
-#                 max-height: 100%;
-#                 z-index: 9999;
-#                 animation: slideIn 1s forwards;
-#             }}
-
-#             @keyframes slideIn {{
-#                 from {{ transform: translate(-50%, -50%) scale(0); }}
-#                 to {{ transform: translate(-50%, -50%) scale(1); }}
-#             }}
-#         </style>
-
-#         <img class="sliding-image" src="data:image/png;base64,{image_base64}" alt="Sliding Image">
-#     """
-
-#     st.markdown(html_code, unsafe_allow_html=True)
-
-# if __name__ == "__main__":
-#     main()
-
 import streamlit as st
 from PIL import Image
 import base64
@@ -366,7 +309,7 @@ def main():
 
 def show_image():
     # Path to your image file
-    image_path = r"C:\Users\jdslo\OneDrive\Bureau\website\langor_seq06_Sh250.png"
+    image_path = "langor_seq06_Sh250.png"
 
     # Open the image using PIL
     image = Image.open(image_path)
@@ -396,24 +339,7 @@ def show_image():
             }}
         </style>
 
-        <div id="image-container">
-            <img class="sliding-image" src="data:image/png;base64,{image_base64}" alt="Sliding Image">
-        </div>
-
-        <script>
-            // Close the image when clicking outside of it
-            document.body.addEventListener("click", function(e) {{
-                var imageContainer = document.getElementById("image-container");
-                if (imageContainer && !imageContainer.contains(e.target)) {{
-                    imageContainer.style.animation = "slideOut 1s forwards";
-
-                    // Remove the image container after the animation completes
-                    setTimeout(function() {{
-                        imageContainer.remove();
-                    }}, 1000);
-                }}
-            }});
-        </script>
+        <img class="sliding-image" src="data:image/png;base64,{image_base64}" alt="Sliding Image">
     """
 
     st.markdown(html_code, unsafe_allow_html=True)

@@ -9,7 +9,6 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
-import streamlit.components.v1 as components
 
 THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
@@ -35,7 +34,6 @@ class Main_Interface():
         self.demoreel_widget = Demoreels_Widget()
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
-    
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
@@ -277,7 +275,7 @@ class GetInTouch_Widgets():
                     Are you nurturing a fresh vision and looking to bring your project to fruition ?
                     I'm ready to accompany you on this journey ! Reach out to me now to discuss your ideas and breathe life into your concept.
                     You need further information ?
-                    Feel free to contact me chabrierleo@outlook.fr or by completing the following form.
+                    Feel free to contact me at chabrierleo@outlook.fr or by completing the following form.
                 """)
             st.write('\n')
 
@@ -321,30 +319,30 @@ class Demoreels_Widget():
         with cols[0]:
             st.caption(':red[_Lighting/Compositing Demoreel_] 🪔🕯💡🔦🏮🎥🎬')
             st.video("https://youtu.be/OKj3iOoG1vs")
-            lighting_expander = st.expander("Details : ", expanded=True)
+            lighting_expander = st.expander("Details : ", expanded=False)
             with lighting_expander:
                 st.caption("This demoreel contains lots of shots I've worked on during my formation at ESMA. Even if it's a lighting/compositing oriented reel, I've been often working on lot of others aspects.")
 
         with cols[1]:
             st.caption(':red[_Pipeline TD Demoreel_] 🤓👾🤖')
             st.video("https://youtu.be/oOppd268_i4")
-            td_expander = st.expander("Details : ", expanded=True)
+            td_expander = st.expander("Details : ", expanded=False)
             with td_expander:
                 st.caption("This demoreel contains lots of tools and applications I've been working on in different softwares like Nuke, Maya, Houdini, Unreal Engine and so on. I've mostly used Python, Qt Designer, and TKinter.")
 
         second_cols = st.columns(2)
 
-        with second_cols[0]:
+        with second_cols[1]:
             st.caption(':red[_Houdini TD Demoreel_] 🌷🔥💧⚡❄🌊')
             st.title("COMING SOON")
-            fx_expander = st.expander("Details : ", expanded=True)
+            fx_expander = st.expander("Details : ", expanded=False)
             with fx_expander:
                 st.caption("This demoreel contains Houdini pipelines i've been working on, RnD and HDA system i've done.")
 
-        with second_cols[1]:
+        with second_cols[0]:
             st.caption(':red[_Lookdev Demoreel_] 🎨🔎')
-            st.title("COMING SOON")
-            lookdev_expander = st.expander("Details : ", expanded=True)
+            st.video("https://youtu.be/_Oi5iOdNe-o")
+            lookdev_expander = st.expander("Details : ", expanded=False)
             with lookdev_expander:
                 st.caption("This demoreel contains lots of assets i've been working on, from modeling to shading.")
 
@@ -354,35 +352,43 @@ class Demoreels_Widget():
         st.video(video_bytes)
 
 class Projects_Breakdowns():
+
     def create_panel(self):
         st.header('_PROJECTS BREAKDOWNS_ :', divider='red')
         projects_data = {
-            "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production"},
-                    {"name": "An old friend", "description": "Single image rendered with Unreal Engine, focused on lighting and composition, using Megascans and Sketchfab assets."},
-                    {"name": "The mines of Mandalore", "description": "First ever animation sequence rendered with Unreal Engine. Discovering of level sequencer, render layers, aovs in Unreal. Compositing in NukeX."},
-                    {"name": "Discovering", "description": "Discovering of Unreal Engine rendering sytem for animation. More an experimentation than a real project. Assets from Sketchfab and Megascans."}],
+            "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production."}
+                    ],
             "2023": [{"name": "Langor short film", "description": """
                       One year production, actually not available, ESMA property.
-                        Made with Yannis Clerima, Sam Moriceau, Guillaume Boeuf-Couëron, Roxelane Guilbaud, Eve Bermond-Gonnet, Solène Lablonde and Marianne Autret !"""}],
-            "2022": [{"name": "Madmax Motorcycle", "description": "Modeling, texturing, shading, showroom and VFX integration of a vehicle. This project was useful to learn about Mari, Nuke camera tracking and match move, grading, and CG elements integration."},
+                        Made with Yannis Clerima, Sam Moriceau, Guillaume Boeuf-Couëron, Roxelane Guilbaud, Eve Bermond-Gonnet, Solène Lablonde and Marianne Autret !"""},
+                    {"name": "Discovering", "description": "Discovering of Unreal Engine rendering sytem for animation. More an experimentation than a real project. Assets from Sketchfab and Megascans."},
+                    {"name": "The mines of Mandalore", "description": "First ever animation sequence rendered with Unreal Engine. Discovering of level sequencer, render layers, aovs in Unreal. Compositing in NukeX."},
+                    {"name": "An old friend", "description": "Single image rendered with Unreal Engine, focused on lighting and composition, using Megascans and Sketchfab assets."},
+                        
+                        ],
+
+            "2022": [{"name": "Rolling Teapot", "description": "Texturing exercice made using Renderman Teapot, a good way to learn texturing in Mari and photorealistic integration."},
+                     {"name": "Madmax Motorcycle", "description": "Modeling, texturing, shading, showroom and VFX integration of a vehicle. This project was useful to learn about Mari, Nuke camera tracking and match move, grading, and CG elements integration."},
                      {"name": "Self-Portrait", "description": "Self portrait, initially captured using RealityCapture, then cleaned in Zbrush, retopologized in Maya, sculpted again in Zbrush, textured in Mari, groomed in Houdini, and rendered with Maya and Renderman."},
-                     {"name": "Claws of Nights", "description": ""}],
+                     {"name": "Claws of Nights", "description": """6 weeks production project, made with Jérémie Lebuffe, Manon François, Eve Bermond-Gonnet, Killian Derlin and Emeline Le Fevre.
+                      I've been mostly working on lighting/texturing, compositing and fx !"""}],
             "2021": [{"name": "The insect", "description": ""},
                      {"name": "The timelapse", "description": ""},
                      {"name": "Camera Mapping", "description": ""},
-                     {"name": "Anguerran Declin's shop", "description": ""},
-                     {"name": "Rolling Teapot", "description": ""}],
-            "2020": [{"name": "Still Life", "description": ""},
+                     {"name": "Anguerran Declin's shop", "description": ""}],
+            "2020": [
                      {"name": "Breakfast", "description": ""},
                      {"name": "Living room", "description": ""},
                      {"name": "The film set", "description": ""},
                      {"name": "The hero's lair", "description": ""}],
-            "2019": [{"name": "Christmas Project", "description": ""}]
+
+            "2019": [{"name": "Christmas Project", "description": ""},
+                     {"name": "Still Life", "description": ""}]
         }
 
         for year, projects in projects_data.items():
             st.subheader(f'_{year}_ :', divider='red')
-            column_sets = st.columns(len(projects))
+            column_sets = st.columns(4)
 
             for col, project_info in zip(column_sets, projects):
                 with col:
@@ -398,33 +404,21 @@ class Projects_Breakdowns():
                             image_found = True
                             break
                     if not image_found:
-                        gray_image = Image.new("RGB", (1920, 1080), (169, 169, 169))
+                        gray_image = Image.new("RGB", (384, 216))
                         st.image(gray_image, use_column_width="always")
 
-                    # hide_img_fs = '''
-                    #     <style>
-                    #     button[title="View fullscreen"]{
-                    #         visibility: hidden;}
-                    #     </style>
-                    #     '''
-                    # st.markdown(hide_img_fs, unsafe_allow_html=True)
-                    st.markdown(
-                        """
+                    hide_img_fs = '''
                         <style>
-                            button[title^=Exit]+div [data-testid=stImage]{
-                                text-align: center;
-                                display: block;
-                                margin-left: auto;
-                                margin-right: auto;
-                                width: 100%;
-                            }
+                        button[title="View fullscreen"]{
+                            visibility: hidden;}
                         </style>
-                        """, unsafe_allow_html=True
-                    )
-                    st.text(project_name)
-                    expander = st.expander("Details : ", expanded=False)
+                        '''
+                    st.markdown(hide_img_fs, unsafe_allow_html=True)
+
+                    expander = st.expander(f"About _{project_name}_ :", expanded=False)
                     with expander:
                         st.caption(project_description)
+
 
 class Coding_Dev():
     def create_panel(self):
@@ -440,6 +434,7 @@ class Coding_Dev():
             for col, project in zip(column_sets, projects):
                 with col:
                     st.title(project)
+
 
 if __name__ == "__main__":
     main_app = Main_Interface()
