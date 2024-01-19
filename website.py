@@ -1,17 +1,12 @@
 from pathlib import Path
-import json
 import os
-import time
 import streamlit as st
-from streamlit_lottie import st_lottie
-from st_clickable_images import clickable_images
 import streamlit_option_menu as stop
 from PIL import Image
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import base64
-
+import pyautogui
 THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
 ASSETS = THIS_DIR / "assets"
@@ -63,14 +58,6 @@ class Main_Interface():
 
         elif selected == "Coding/Development":
             self.coding_dev.create_panel()
-        
-    def opening(self, file_path):
-        with open(file_path, "r") as gif:
-            return json.load(gif)
-        
-    def run_lottie_animation(self, animation, duration):
-        st_lottie(animation, key="entering_animation", height=300, loop=False )
-        time.sleep(duration)
 
 class AboutMe_Widgets():
 
@@ -355,31 +342,45 @@ class Demoreels_Widget():
         st.video(video_bytes)
 
 class Projects_Breakdowns():
-    def create_panel(self):
-        st.header('_PROJECTS BREAKDOWNS_ :', divider='red')
-        project_date = os.listdir(PROJECTS_BREAKDOWNS)
-        project_date.reverse()
-        for year in project_date :
-            st.subheader(f'_{year}_ :', divider='red')
-            column_sets = st.columns(4)
-            current_year = os.path.join(PROJECTS_BREAKDOWNS, year)
-            for col, project in zip(column_sets, os.listdir(current_year)) :
-                with col:
-                    gray_image = Image.new("RGB", (384, 216))
-                    st.image(gray_image, use_column_width="always")
-                    st.button(project, key = f"button{project}")
-                    st.markdown(
-                        """
-                        <style>
-                        div.stButton > button {
-                            display: block;
-                            margin: auto;
-                        }
-                        </style>
-                        """,
-                        unsafe_allow_html=True,
-                    )
+    def __init__(self):
+        super().__init__()
+        self.page_content_placeholder = st.empty()
         
+    def create_panel(self):
+        with self.page_content_placeholder.container():
+            st.header('_PROJECTS BREAKDOWNS_ :', divider='red')
+            project_date = os.listdir(PROJECTS_BREAKDOWNS)
+            project_date.reverse()
+            gray_image = Image.new("RGB", (384, 216))
+
+            for year in project_date:
+                st.subheader(f'_{year}_ :', divider='red')
+                column_sets = st.columns(4)
+                current_year = os.path.join(PROJECTS_BREAKDOWNS, year)
+
+                for col, project in zip(column_sets, os.listdir(current_year)):
+                    with col:
+                        st.image(gray_image, use_column_width="always")
+                        current_project = os.path.join(current_year, project)
+
+                        if "details.txt" in os.listdir(current_project):
+                            current_details = os.path.join(current_project, "details.txt")
+                            current_details = current_details.replace("\\", "/")
+
+                            with open(current_details, "r") as details:
+                                loaded_details = details.read()
+
+                            button_key = f"button{project}"
+                            st.button(f"{project}", key=button_key, on_click=lambda: self.show_project_details(loaded_details, project))
+        # self.page_content_placeholder.empty()
+
+    def show_project_details(self, loaded_details, project):
+        self.page_content_placeholder.empty()
+        with self.page_content_placeholder.container():
+            st.button("Restart", on_click=self.create_panel)
+            st.title(f"About the project _{project}_ :")
+            st.write(f"{loaded_details}")
+
 
         # projects_data = {
         #     "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production."}
@@ -454,7 +455,6 @@ class Projects_Breakdowns():
         #                 unsafe_allow_html=True,
         #             )
 
-        
 class Coding_Dev():
     def create_panel(self):
         st.header('_CODING/DEVELOPMENT_ :', divider='red')
@@ -472,6 +472,4 @@ class Coding_Dev():
 
 if __name__ == "__main__":
     main_app = Main_Interface()
-    # anim = main_app.opening(LOTTIE_ANIMATION)
-    # main_app.run_lottie_animation(anim, duration = 2)
     main_app.buttons()
