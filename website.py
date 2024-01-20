@@ -51,8 +51,8 @@ class Main_Interface():
         elif selected == "Projects breakdowns":
             self.projects_breakdowns.create_panel()
 
-        elif selected == "Coding/Development":
-            self.coding_dev.create_panel()
+        # elif selected == "Coding/Development":
+        #     self.coding_dev.create_panel()
 
 class AboutMe_Widgets():
 
@@ -61,7 +61,7 @@ class AboutMe_Widgets():
 
         NAME = "Léo Chabrier"
         DESCRIPTION = """
-        I'm a junior 3D generalist freelance, with a master degree in 3D animation and visual effects delivered by ESMA,
+        I'm a junior 3D generalist, with a master degree in 3D animation and visual effects delivered by ESMA,
         specialised in lookdev/lighting/rendering/compositing/fx/cfx/pipeline/scripting/RND.
         """
         EMAIL = "chabrierleo@outlook.fr"
@@ -84,7 +84,7 @@ class AboutMe_Widgets():
         with open(CV, "rb") as pdf_file:
             cv_byte = pdf_file.read()
         profile_pic = Image.open(PROFIL)
-        diplome_pic = Image.open(DIPLOME)
+        # diplome_pic = Image.open(DIPLOME)
 
 
         # --- HERO SECTION ---
@@ -98,8 +98,8 @@ class AboutMe_Widgets():
                 file_name=CV.name,
                 mime="application/octet-stream",
             )
-        with layout_column[1]:
-            st.image(diplome_pic, width=700)
+        # with layout_column[1]:
+        #     st.image(diplome_pic, width=700)
 
         st.write('\n')
         expander = st.expander("Details : ", expanded=True)
@@ -137,7 +137,7 @@ class AboutMe_Widgets():
                 """
             - ✔️ Great team-player and displaying strong sense of initiative on tasks.
             - ✔️ Self-motivated and passioned.
-            - ✔️ Strong artistic eye and attention to detail in composition, lighting, colors, compositing.
+            - ✔️ Strong artistic eye and attention to detail in composition, light, colors.
             - ✔️ Capacity to adapt skills to any visual graphic style.
             - ✔️ Great interest in photography.
             - ✔️ Strong adaptability to different pipelines and workflows.
@@ -147,11 +147,11 @@ class AboutMe_Widgets():
             st.subheader("Hard Skills :")
             st.write(
                 """
-            - ✔️ Ability to intervene in any department of a 3D production, from layout to post-production. 
+            - ✔️ Ability to intervene in any department of a 3D production. 
             - ✔️ Strong knowledges of Python, abitility to automate lots of tasks.
             - ✔️ Good mastery of UI design with Qt Designer/PySide2/PyQt5/TKinter, Streamlit.
-            - ✔️ AI development in Autodesk Maya, Nuke and Houdini with OpenAi API and Whisper. 
-            - ✔️ Strong understanding on lots of 3D softwares, ability to resolve major technical problems.
+            - ✔️ AI development Maya, Nuke and Houdini with OpenAi API and Whisper. 
+            - ✔️ Strong understanding on lots of 3D softwares, ability to solve technical problems.
             - ✔️ Basic knowledges of C++, HTML, CSS, JavaScript.
             """
             )

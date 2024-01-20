@@ -1,0 +1,1 @@
+Self portrait, initially captured using RealityCapture, then cleaned in Zbrush, retopologized in Maya, sculpted again in Zbrush, textured in Mari, groomed in Houdini, and rendered with Maya and Renderman.

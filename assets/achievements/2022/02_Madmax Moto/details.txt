@@ -1,0 +1,1 @@
+Modeling, texturing, shading, showroom and VFX integration of a vehicle. This project was useful to learn about Mari, Nuke camera tracking and match move, grading, and CG elements integration.

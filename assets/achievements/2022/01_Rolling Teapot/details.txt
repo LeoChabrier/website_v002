@@ -1,0 +1,1 @@
+Texturing exercice made using Renderman Teapot, a good way to learn texturing in Mari and photorealistic integration.
