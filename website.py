@@ -458,7 +458,7 @@ class Projects_Breakdowns():
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
 
                 for i in matching_files:
-                    shot_name = str(i.split('\\')[-1]).split('.')[0]
+                    shot_name = str(i.split('/')[-1]).split('.')[0]
                     image = Image.open(i)
                     st.image(image, use_column_width="always")
                     css_class = f"caption-{shot_name.replace(' ', '-').lower()}"
