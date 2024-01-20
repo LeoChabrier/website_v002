@@ -361,7 +361,7 @@ class Projects_Breakdowns():
             """
             <style>
             div.stButton > button {
-                width: 340px;
+                width: 100%;
                 display: block;
                 margin: auto;
             }
@@ -369,6 +369,7 @@ class Projects_Breakdowns():
             """,
             unsafe_allow_html=True,
         )
+
         st.markdown('''
                     <style>
                     button[title="View fullscreen"]{
@@ -376,7 +377,6 @@ class Projects_Breakdowns():
                     </style>
                     ''', unsafe_allow_html=True)
 
-        directory = r'assets\achievements'
         subdirectories = [d for d in next(walk(PROJECTS_BREAKDOWNS))[1]]
         year_subfolders_dict = {}
         all_subdirectories = []
@@ -425,9 +425,10 @@ class Projects_Breakdowns():
                         else : 
                             st.image(Image.new("RGB", (1920, 1080)))
 
-                        if st.button(project_name, key=f'{project_name}_button'):
+                        if col.button(project_name, key=f'{project_name}_button'):
                             clicked_button_label = project_name
                             break
+                        
         if clicked_button_label:
             col = st.columns([2,6,2])
             visible_buttons.append(clicked_button_label)
