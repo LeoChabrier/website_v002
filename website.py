@@ -454,8 +454,8 @@ class Projects_Breakdowns():
                     except:
                         pass
 
-        #     with col[1]:
-        #         st.write(f"About _{subdir}_ :\n\n{loaded_details}")
+            with col[1]:
+                st.write(f"About _{subdir}_ :\n\n{loaded_details}")
 
         #         for i in matching_files:
         #             shot_name = str(i.split('\\')[-1]).split('.')[0]
