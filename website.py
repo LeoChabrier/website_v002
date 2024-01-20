@@ -436,23 +436,23 @@ class Projects_Breakdowns():
 
             st.session_state.current_subdirectory = clicked_button_label
 
-        # for subdir in visible_buttons:
-        #     matching_files = [file for file in all_files if subdir in file]
-        #     text_file = [file for file in text_files if subdir in file]
+        for subdir in visible_buttons:
+            matching_files = [file for file in all_files if subdir in file]
+            text_file = [file for file in text_files if subdir in file]
 
-        #     loaded_details = None
-        #     loaded_link = None
+            loaded_details = None
+            loaded_link = None
 
-        #     for text in text_file:
-        #         if str(text.split('\\')[-1]) == "details.txt":
-        #             with open(text, "r") as details:
-        #                 loaded_details = details.read()
-        #         else:
-        #             try:
-        #                 with open(text, "r") as link:
-        #                     loaded_link = link.readlines()
-        #             except:
-        #                 pass
+            for text in text_file:
+                if str(text.split('\\')[-1]) == "details.txt":
+                    with open(text, "r") as details:
+                        loaded_details = details.read()
+                else:
+                    try:
+                        with open(text, "r") as link:
+                            loaded_link = link.readlines()
+                    except:
+                        pass
 
         #     with col[1]:
         #         st.write(f"About _{subdir}_ :\n\n{loaded_details}")
