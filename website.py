@@ -443,7 +443,7 @@ class Projects_Breakdowns():
             loaded_link = None
 
             for text in text_file:
-                if str(text.split('\\')[-1]) == "details.txt":
+                if str(text.split('/')[-1]) == "details.txt":
                     with open(text, "r") as details:
                         loaded_details = details.read()
                         st.write(loaded_details)
