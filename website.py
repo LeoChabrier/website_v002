@@ -344,7 +344,7 @@ class Projects_Breakdowns():
         all_files = []
         for dirpath, _, filenames in walk(directory):
             for filename in filenames:
-                if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.mp4')):
+                if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
                     all_files.append(path.join(dirpath, filename))
         return all_files
 
@@ -352,12 +352,11 @@ class Projects_Breakdowns():
         text_files = []
         for dirpath, _, filenames in walk(directory):
             for filename in filenames:
-                if filename.lower().endswith(('.txt')):
+                if filename.lower().endswith(('.txt', ".json")):
                     text_files.append(path.join(dirpath, filename))
         return text_files
     
     def create_panel(self):
-
         st.markdown(
             """
             <style>
@@ -439,24 +438,25 @@ class Projects_Breakdowns():
         for subdir in visible_buttons:
             matching_files = [file for file in all_files if subdir in file]
             text_file = [file for file in text_files if subdir in file]
+
             for text in text_file : 
-                with open(text, "r") as details:
-                    loaded_details = details.read()
+                if (str(text.split('\\')[-1]) == "details.txt") :
+                    with open(text, "r") as details:
+                        loaded_details = details.read()
+                else :
+                    with open(text, "r") as link:
+                        loaded_link = link.readlines()
+
             with col[1]:
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
-                for i in matching_files:
-                    extension = str(i.split('\\')[-1]).split('.')[1]
-                    caption = str(i.split('\\')[-1]).split('.')[0]
-                    if extension != "mp4":
-                        image = Image.open(i)
-                        st.image(image, use_column_width="always")
-                    # else:
-                    #     video_file = open(i, 'rb')
-                    #     st.video(video_file)
+                for link in loaded_link :
+                    st.video(link.split('\n')[0])
 
-                    # Apply a unique CSS class for each caption
-                    css_class = f"caption-{caption.replace(' ', '-').lower()}"
-                    st.write(f'<div class="{css_class}">{caption}</div>', unsafe_allow_html=True)
+                for i in matching_files:
+                    image = Image.open(i)
+                    st.image(image, use_column_width="always")
+                    css_class = f"caption-{subdir.replace(' ', '-').lower()}"
+                    st.write(f'<div class="{css_class}">{subdir}</div>', unsafe_allow_html=True)
                     title_alignment = f"""
                     <style>
                     .{css_class} {{
