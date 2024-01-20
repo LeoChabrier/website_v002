@@ -385,7 +385,7 @@ class Projects_Breakdowns():
             year_folder_path = path.join(PROJECTS_BREAKDOWNS, year_folder)
             sub_folders = next(walk(year_folder_path))[1]
 
-            sub_folders.reverse()
+            # sub_folders.reverse()
             
             year_subfolders_dict[year_folder] = sub_folders[::-1]
             all_subdirectories.extend(sub_folders)
