@@ -255,7 +255,7 @@ class GetInTouch_Widgets():
             st.session_state.submitted = False
 
         st.header('_GET IN TOUCH_ :', divider='red')
-        col = st.columns([2,6,2])
+        col = st.columns([1,8,1])
         with col[1]:
             placeholder = st.empty()
             with placeholder.form(key = "my_form", clear_on_submit = True):
