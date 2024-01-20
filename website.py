@@ -1,9 +1,10 @@
-from pathlib import Path
-from os import walk, path
+
 import streamlit as st
 import streamlit_option_menu as stop
+from smtplib import SMTP
 from PIL import Image
-import smtplib
+from pathlib import Path
+from os import walk, path
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -280,7 +281,7 @@ class GetInTouch_Widgets():
             self.envoyer_email(name, company, email, message, allowed)
             
     def envoyer_email(self, name, company, email, message, allowed):
-        server = smtplib.SMTP("smtp-mail.outlook.com", 587)
+        server = SMTP("smtp-mail.outlook.com", 587)
         server.starttls()
         expediteur_email = 'l.chabrier@nts.ecolescreatives.com'
         mot_de_passe_expediteur = 'EsmaNantes44'
