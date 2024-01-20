@@ -455,16 +455,13 @@ class Projects_Breakdowns():
 
             with col[1]:
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
-                if loaded_link:
-                    for link in loaded_link:
-                        st.video(link.split('\n')[0])
-
 
                 for i in matching_files:
+                    shot_name = str(i.split('\\')[-1]).split('.')[0]
                     image = Image.open(i)
                     st.image(image, use_column_width="always")
-                    css_class = f"caption-{subdir.replace(' ', '-').lower()}"
-                    st.write(f'<div class="{css_class}">{subdir}</div>', unsafe_allow_html=True)
+                    css_class = f"caption-{shot_name.replace(' ', '-').lower()}"
+                    st.write(f'<div class="{css_class}">{shot_name}</div>', unsafe_allow_html=True)
                     title_alignment = f"""
                     <style>
                     .{css_class} {{
@@ -473,6 +470,11 @@ class Projects_Breakdowns():
                     </style>
                     """
                     st.markdown(title_alignment, unsafe_allow_html=True)
+                
+                if loaded_link:
+                    for link in loaded_link:
+                        st.video(link.split('\n')[0])
+
 
 class Coding_Dev():
     def create_panel(self):

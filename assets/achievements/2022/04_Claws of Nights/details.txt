@@ -1,2 +1,2 @@
-6 weeks production project, made with Jeremie Lebuffe, Manon François, Eve Bermond-Gonnet, Killian Derlin and Emeline Le Fevre.
+6 weeks production project, made with Jeremie Lebuffe, Manon Francois, Eve Bermond-Gonnet, Killian Derlin and Emeline Le Fevre.
 I've been mostly working on lighting/texturing, compositing and fx !
