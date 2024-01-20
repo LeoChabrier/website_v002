@@ -1,0 +1,1 @@
+Discovering of Unreal Engine rendering sytem for animation. More an experimentation than a real project. Assets from Sketchfab and Megascans.

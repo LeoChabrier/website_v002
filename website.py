@@ -6,7 +6,7 @@ from PIL import Image
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import pyautogui
+
 THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
 ASSETS = THIS_DIR / "assets"
@@ -16,11 +16,6 @@ CV = ASSETS / "CHABRIER_Léo_Curriculum_Vitae.pdf"
 DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
 LOTTIE_ANIMATION = ASSETS / "hello-october.json"
 PROJECTS_BREAKDOWNS = ASSETS / "achievements"
-
-# https://discuss.streamlit.io/t/automatic-slideshow/38342/5
-# https://github.com/haltakov/simple-photo-gallery/blob/master/README.md
-# https://forum.mendix.com/link/space/app-development/questions/104660
-# https://medium.com/allenhwkim/close-div-when-clicking-outside-it-97255c20a221
 
 class Main_Interface():
     def __init__(self):
@@ -259,22 +254,24 @@ class GetInTouch_Widgets():
             st.session_state.submitted = False
 
         st.header('_GET IN TOUCH_ :', divider='red')
-        placeholder = st.empty()
-        with placeholder.form(key = "my_form", clear_on_submit = True):
-            st.text("""
-                    Are you nurturing a fresh vision and looking to bring your project to fruition ?
-                    I'm ready to accompany you on this journey ! Reach out to me now to discuss your ideas and breathe life into your concept.
-                    You need further information ?
-                    Feel free to contact me at chabrierleo@outlook.fr or by completing the following form.
-                """)
-            st.write('\n')
+        col = st.columns([2,6,2])
+        with col[1]:
+            placeholder = st.empty()
+            with placeholder.form(key = "my_form", clear_on_submit = True):
+                st.text("""
+                        Are you nurturing a fresh vision and looking to bring your project to fruition ?
+                        I'm ready to accompany you on this journey ! Reach out to me now to discuss your ideas and breathe life into your concept.
+                        You need further information ?
+                        Feel free to contact me at chabrierleo@outlook.fr or by completing the following form.
+                    """)
+                st.write('\n')
 
-            name = st.text_input("Your name : ", key="Name")
-            company = st.text_input("Company Name (Optional) : ", key="Company")
-            email = st.text_input("Email address : ", key="Email")
-            message = st.text_area("Your message : \n\n\n\n", height=500, key="Message")
-            allowed = st.checkbox("I accept the above information will be used to contact me. ", value=False)
-            submitted = st.form_submit_button("Submit")
+                name = st.text_input("Your name : ", key="Name")
+                company = st.text_input("Company Name (Optional) : ", key="Company")
+                email = st.text_input("Email address : ", key="Email")
+                message = st.text_area("Your message : \n\n\n\n", height=500, key="Message")
+                allowed = st.checkbox("I accept the above information will be used to contact me. ", value=False)
+                submitted = st.form_submit_button("Submit")
                 
         if submitted and not st.session_state.submitted and (name != "") and (email != "") and (message != "") and(allowed ==True):
             st.session_state.submitted = True
@@ -282,9 +279,6 @@ class GetInTouch_Widgets():
             st.write("Your message has been sent. I'll get back to you as soon as possible!")
             self.envoyer_email(name, company, email, message, allowed)
             
-
-            
-
     def envoyer_email(self, name, company, email, message, allowed):
         server = smtplib.SMTP("smtp-mail.outlook.com", 587)
         server.starttls()
@@ -344,116 +338,129 @@ class Demoreels_Widget():
 class Projects_Breakdowns():
     def __init__(self):
         super().__init__()
-        self.page_content_placeholder = st.empty()
-        
-    def create_panel(self):
-        with self.page_content_placeholder.container():
-            st.header('_PROJECTS BREAKDOWNS_ :', divider='red')
-            project_date = os.listdir(PROJECTS_BREAKDOWNS)
-            project_date.reverse()
-            gray_image = Image.new("RGB", (384, 216))
 
-            for year in project_date:
-                st.subheader(f'_{year}_ :', divider='red')
-                column_sets = st.columns(4)
-                current_year = os.path.join(PROJECTS_BREAKDOWNS, year)
+    def get_all_image_files(self, directory):
+        all_files = []
+        for dirpath, _, filenames in os.walk(directory):
+            for filename in filenames:
+                if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.mp4')):
+                    all_files.append(os.path.join(dirpath, filename))
+        return all_files
 
-                for col, project in zip(column_sets, os.listdir(current_year)):
+    def get_text_file(self, directory):
+        text_files = []
+        for dirpath, _, filenames in os.walk(directory):
+            for filename in filenames:
+                if filename.lower().endswith(('.txt')):
+                    text_files.append(os.path.join(dirpath, filename))
+        return text_files
+    
+    def create_panel(self): 
+        st.markdown(
+            """
+            <style>
+            div.stButton > button {
+                width: 300px;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown('''
+                    <style>
+                    button[title="View fullscreen"]{
+                        visibility: hidden;}
+                    </style>
+                    ''', unsafe_allow_html=True)
+
+        directory = r'assets\achievements'
+        subdirectories = [d for d in next(os.walk(directory))[1]]
+        year_subfolders_dict = {}
+        all_subdirectories = []
+
+        for year_folder in subdirectories:
+            year_folder_path = os.path.join(directory, year_folder)
+            sub_folders = next(os.walk(year_folder_path))[1]
+
+            sub_folders.reverse()
+            
+            year_subfolders_dict[year_folder] = sub_folders[::-1]
+            all_subdirectories.extend(sub_folders)
+
+        year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
+
+        all_files = self.get_all_image_files(directory)
+        text_files = self.get_text_file(directory)
+
+        st.header('*PROJECTS BREAKDOWNS* :', divider='red')
+
+
+        button_container = st.empty()
+        visible_buttons = []
+        hidden_buttons = [subdir for subdir in all_subdirectories]
+        hidden_buttons.reverse()
+        clicked_button_label = None
+        with button_container.container():
+            for year, subdir in year_subfolders_dict.items():
+                st.subheader(year, divider='red')
+                columns = st.columns(4)
+                for col, sub_item in zip(columns, subdir):
                     with col:
-                        st.image(gray_image, use_column_width="always")
-                        current_project = os.path.join(current_year, project)
+                        matching_files = [file for file in all_files if sub_item in file]
+                        project_name = sub_item.split('_')[1]
+                        if matching_files:
+                            image_path = matching_files[0]
+                            new_width = 1920
+                            new_height = 1080
+                            original_image = Image.open(image_path)
+                            left = (original_image.width - new_width) // 2
+                            top = (original_image.height - new_height) // 2
+                            right = (original_image.width + new_width) // 2
+                            bottom = (original_image.height + new_height) // 2
+                            cropped_image = original_image.crop((left, top, right, bottom))
+                            st.image(cropped_image, use_column_width=True)
+                            if st.button(project_name, key=f'{project_name}_button'):
+                                clicked_button_label = project_name
+                                break
+                        else : 
+                            st.image(Image.new("RGB", (1920, 1080)))
+        if clicked_button_label:
+            col = st.columns([2,6,2])
+            visible_buttons.append(clicked_button_label)
+            button_container.button("Back to gallery")
 
-                        if "details.txt" in os.listdir(current_project):
-                            current_details = os.path.join(current_project, "details.txt")
-                            current_details = current_details.replace("\\", "/")
+            st.session_state.current_subdirectory = clicked_button_label
 
-                            with open(current_details, "r") as details:
-                                loaded_details = details.read()
+        for subdir in visible_buttons:
+            matching_files = [file for file in all_files if subdir in file]
+            text_file = [file for file in text_files if subdir in file]
+            for text in text_file : 
+                with open(text, "r") as details:
+                    loaded_details = details.read()
+            with col[1]:
+                st.write(f"About _{subdir}_ :\n\n{loaded_details}")
+                for i in matching_files:
+                    extension = str(i.split('\\')[-1]).split('.')[1]
+                    caption = str(i.split('\\')[-1]).split('.')[0]
+                    if extension != "mp4":
+                        st.image(i, use_column_width="always")
+                    else:
+                        video_file = open(i, 'rb')
+                        st.video(video_file)
 
-                            button_key = f"button{project}"
-                            st.button(f"{project}", key=button_key, on_click=lambda: self.show_project_details(loaded_details, project))
-        # self.page_content_placeholder.empty()
+                    # Apply a unique CSS class for each caption
+                    css_class = f"caption-{caption.replace(' ', '-').lower()}"
+                    st.write(f'<div class="{css_class}">{caption}</div>', unsafe_allow_html=True)
 
-    def show_project_details(self, loaded_details, project):
-        self.page_content_placeholder.empty()
-        with self.page_content_placeholder.container():
-            st.button("Restart", on_click=self.create_panel)
-            st.title(f"About the project _{project}_ :")
-            st.write(f"{loaded_details}")
-
-
-        # projects_data = {
-        #     "2024": [{"name": "The forgotten robot soldier", "description": "Actually in production."}
-        #             ],
-        #     "2023": [{"name": "Langor short film", "description": """
-        #               One year production, actually not available, ESMA property.
-        #                 Made with Yannis Clerima, Sam Moriceau, Guillaume Boeuf-Couëron, Roxelane Guilbaud, Eve Bermond-Gonnet, Solène Lablonde and Marianne Autret !"""},
-        #             {"name": "Discovering", "description": "Discovering of Unreal Engine rendering sytem for animation. More an experimentation than a real project. Assets from Sketchfab and Megascans."},
-        #             {"name": "The mines of Mandalore", "description": "First ever animation sequence rendered with Unreal Engine. Discovering of level sequencer, render layers, aovs in Unreal. Compositing in NukeX."},
-        #             {"name": "An old friend", "description": "Single image rendered with Unreal Engine, focused on lighting and composition, using Megascans and Sketchfab assets."},
-                        
-        #                 ],
-
-        #     "2022": [{"name": "Rolling Teapot", "description": "Texturing exercice made using Renderman Teapot, a good way to learn texturing in Mari and photorealistic integration."},
-        #              {"name": "Madmax Motorcycle", "description": "Modeling, texturing, shading, showroom and VFX integration of a vehicle. This project was useful to learn about Mari, Nuke camera tracking and match move, grading, and CG elements integration."},
-        #              {"name": "Self-Portrait", "description": "Self portrait, initially captured using RealityCapture, then cleaned in Zbrush, retopologized in Maya, sculpted again in Zbrush, textured in Mari, groomed in Houdini, and rendered with Maya and Renderman."},
-        #              {"name": "Claws of Nights", "description": """6 weeks production project, made with Jérémie Lebuffe, Manon François, Eve Bermond-Gonnet, Killian Derlin and Emeline Le Fevre.
-        #               I've been mostly working on lighting/texturing, compositing and fx !"""}],
-        #     "2021": [{"name": "The insect", "description": ""},
-        #              {"name": "The timelapse", "description": ""},
-        #              {"name": "Camera Mapping", "description": ""},
-        #              {"name": "Anguerran Declin's shop", "description": ""}],
-        #     "2020": [
-        #              {"name": "Breakfast", "description": ""},
-        #              {"name": "Living room", "description": ""},
-        #              {"name": "The film set", "description": ""},
-        #              {"name": "The hero's lair", "description": ""}],
-
-        #     "2019": [{"name": "Christmas Project", "description": ""},
-        #              {"name": "Still Life", "description": ""}]
-        # }
-
-        # for year, projects in projects_data.items():
-        #     st.subheader(f'_{year}_ :', divider='red')
-        #     column_sets = st.columns(4)
-
-        #     for col, project_info in zip(column_sets, projects):
-        #         with col:
-        #             project_name = project_info["name"]
-        #             project_description = project_info["description"]
-        #             image_extensions = [".jpg", ".png"]
-        #             image_found = False
-        #             for ext in image_extensions:
-        #                 image_path = str(PROJECTS_BREAKDOWNS / project_name / f"{project_name} 01{ext}")
-        #                 if os.path.exists(image_path):
-        #                     image = Image.open(image_path)
-        #                     st.image(image, use_column_width="always")
-        #                     image_found = True
-        #                     break
-        #             if not image_found:
-        #                 gray_image = Image.new("RGB", (384, 216))
-        #                 st.image(gray_image, use_column_width="always")
-
-        #             hide_img_fs = '''
-        #                 <style>
-        #                 button[title="View fullscreen"]{
-        #                     visibility: hidden;}
-        #                 </style>
-        #                 '''
-        #             st.markdown(hide_img_fs, unsafe_allow_html=True)
-        #             st.button(project_name, key = f"button{project_name}")
-                    
-        #             st.markdown(
-        #                 """
-        #                 <style>
-        #                 div.stButton > button {
-        #                     display: block;
-        #                     margin: auto;
-        #                 }
-        #                 </style>
-        #                 """,
-        #                 unsafe_allow_html=True,
-        #             )
+                    # Apply the style CSS for each caption
+                    title_alignment = f"""
+                    <style>
+                    .{css_class} {{
+                        text-align: center;
+                    }}
+                    </style>
+                    """
+                    st.markdown(title_alignment, unsafe_allow_html=True)
 
 class Coding_Dev():
     def create_panel(self):
