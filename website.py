@@ -401,7 +401,7 @@ class Projects_Breakdowns():
         button_container = st.empty()
         visible_buttons = []
         hidden_buttons = [subdir for subdir in all_subdirectories]
-        # hidden_buttons.reverse()
+        hidden_buttons.reverse()
         clicked_button_label = None
         with button_container.container():
             for year, subdir in year_subfolders_dict.items():
