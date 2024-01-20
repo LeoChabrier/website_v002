@@ -439,18 +439,26 @@ class Projects_Breakdowns():
             matching_files = [file for file in all_files if subdir in file]
             text_file = [file for file in text_files if subdir in file]
 
-            for text in text_file : 
-                if (str(text.split('\\')[-1]) == "details.txt") :
+            loaded_details = None
+            loaded_link = None
+
+            for text in text_file:
+                if str(text.split('\\')[-1]) == "details.txt":
                     with open(text, "r") as details:
                         loaded_details = details.read()
-                else :
-                    with open(text, "r") as link:
-                        loaded_link = link.readlines()
+                else:
+                    try:
+                        with open(text, "r") as link:
+                            loaded_link = link.readlines()
+                    except:
+                        pass
 
             with col[1]:
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
-                for link in loaded_link :
-                    st.video(link.split('\n')[0])
+                if loaded_link:
+                    for link in loaded_link:
+                        st.video(link.split('\n')[0])
+
 
                 for i in matching_files:
                     image = Image.open(i)
