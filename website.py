@@ -361,7 +361,7 @@ class Projects_Breakdowns():
             """
             <style>
             div.stButton > button {
-                width: 300px;
+                width: 320px;
             }
             </style>
             """,
