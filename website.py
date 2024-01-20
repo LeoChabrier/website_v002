@@ -443,14 +443,15 @@ class Projects_Breakdowns():
                 if (str(text.split('\\')[-1]) == "details.txt") :
                     with open(text, "r") as details:
                         loaded_details = details.read()
-                else :
-                    with open(text, "r") as link:
-                        loaded_link = link.readlines()
+                        print(loaded_details)
+                # else :
+                #     with open(text, "r") as link:
+                #         loaded_link = link.readlines()
 
             with col[1]:
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
-                for link in loaded_link :
-                    st.video(link.split('\n')[0])
+                # for link in loaded_link :
+                #     st.video(link.split('\n')[0])
 
                 for i in matching_files:
                     image = Image.open(i)
