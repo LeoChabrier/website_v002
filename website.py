@@ -445,7 +445,8 @@ class Projects_Breakdowns():
                     extension = str(i.split('\\')[-1]).split('.')[1]
                     caption = str(i.split('\\')[-1]).split('.')[0]
                     if extension != "mp4":
-                        st.image(i, use_column_width="always")
+                        image = Image.open(i)
+                        st.image(image, use_column_width="always")
                     else:
                         video_file = open(i, 'rb')
                         st.video(video_file)
