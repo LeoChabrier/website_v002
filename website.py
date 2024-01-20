@@ -435,7 +435,6 @@ class Projects_Breakdowns():
             st.session_state.current_subdirectory = clicked_button_label
 
         for subdir in visible_buttons:
-            print(subdir)
             matching_files = [file for file in all_files if subdir in file]
             text_file = [file for file in text_files if subdir in file]
 
@@ -446,7 +445,6 @@ class Projects_Breakdowns():
                 if str(text.split('/')[-1]) == "details.txt":
                     with open(text, "r") as details:
                         loaded_details = details.read()
-                        st.write(loaded_details)
                 else:
                     try:
                         with open(text, "r") as link:
