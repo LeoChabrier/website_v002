@@ -356,12 +356,15 @@ class Projects_Breakdowns():
                     text_files.append(path.join(dirpath, filename))
         return text_files
     
-    def create_panel(self): 
+    def create_panel(self):
+
         st.markdown(
             """
             <style>
             div.stButton > button {
                 width: 340px;
+                display: block;
+                margin: auto;
             }
             </style>
             """,
@@ -454,8 +457,6 @@ class Projects_Breakdowns():
                     # Apply a unique CSS class for each caption
                     css_class = f"caption-{caption.replace(' ', '-').lower()}"
                     st.write(f'<div class="{css_class}">{caption}</div>', unsafe_allow_html=True)
-
-                    # Apply the style CSS for each caption
                     title_alignment = f"""
                     <style>
                     .{css_class} {{
