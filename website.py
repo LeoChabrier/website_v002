@@ -12,11 +12,11 @@ THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
 ASSETS = THIS_DIR / "assets"
 PROFIL = ASSETS / "profile-pic.png"
-
 CV = ASSETS / "CHABRIER_Léo_Curriculum_Vitae.pdf"
 DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
 LOTTIE_ANIMATION = ASSETS / "hello-october.json"
 PROJECTS_BREAKDOWNS = ASSETS / "achievements"
+
 
 class Main_Interface():
     def __init__(self):
@@ -375,12 +375,12 @@ class Projects_Breakdowns():
                     ''', unsafe_allow_html=True)
 
         directory = r'assets\achievements'
-        subdirectories = [d for d in next(walk(directory))[1]]
+        subdirectories = [d for d in next(walk(PROJECTS_BREAKDOWNS))[1]]
         year_subfolders_dict = {}
         all_subdirectories = []
 
         for year_folder in subdirectories:
-            year_folder_path = path.join(directory, year_folder)
+            year_folder_path = path.join(PROJECTS_BREAKDOWNS, year_folder)
             sub_folders = next(walk(year_folder_path))[1]
 
             sub_folders.reverse()
@@ -390,8 +390,8 @@ class Projects_Breakdowns():
 
         year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
 
-        all_files = self.get_all_image_files(directory)
-        text_files = self.get_text_file(directory)
+        all_files = self.get_all_image_files(PROJECTS_BREAKDOWNS)
+        text_files = self.get_text_file(PROJECTS_BREAKDOWNS)
 
         st.header('*PROJECTS BREAKDOWNS* :', divider='red')
 
