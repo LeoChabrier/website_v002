@@ -447,34 +447,34 @@ class Projects_Breakdowns():
                     with open(text, "r") as details:
                         loaded_details = details.read()
                         st.write(loaded_details)
-            #     else:
-            #         try:
-            #             with open(text, "r") as link:
-            #                 loaded_link = link.readlines()
-            #         except:
-            #             pass
+                else:
+                    try:
+                        with open(text, "r") as link:
+                            loaded_link = link.readlines()
+                    except:
+                        pass
 
-            # with col[1]:
-            #     st.write(f"About _{subdir}_ :\n\n{loaded_details}")
+            with col[1]:
+                st.write(f"About _{subdir}_ :\n\n{loaded_details}")
 
-                # for i in matching_files:
-                #     shot_name = str(i.split('\\')[-1]).split('.')[0]
-                #     image = Image.open(i)
-                #     st.image(image, use_column_width="always")
-                #     css_class = f"caption-{shot_name.replace(' ', '-').lower()}"
-                #     st.write(f'<div class="{css_class}">{shot_name}</div>', unsafe_allow_html=True)
-                #     title_alignment = f"""
-                #     <style>
-                #     .{css_class} {{
-                #         text-align: center;
-                #     }}
-                #     </style>
-                #     """
-                #     st.markdown(title_alignment, unsafe_allow_html=True)
+                for i in matching_files:
+                    shot_name = str(i.split('\\')[-1]).split('.')[0]
+                    image = Image.open(i)
+                    st.image(image, use_column_width="always")
+                    css_class = f"caption-{shot_name.replace(' ', '-').lower()}"
+                    st.write(f'<div class="{css_class}">{shot_name}</div>', unsafe_allow_html=True)
+                    title_alignment = f"""
+                    <style>
+                    .{css_class} {{
+                        text-align: center;
+                    }}
+                    </style>
+                    """
+                    st.markdown(title_alignment, unsafe_allow_html=True)
                 
-                # if loaded_link:
-                #     for link in loaded_link:
-                #         st.video(link.split('\n')[0])
+                if loaded_link:
+                    for link in loaded_link:
+                        st.video(link.split('\n')[0])
 
 
 class Coding_Dev():
