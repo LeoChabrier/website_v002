@@ -447,9 +447,9 @@ class Projects_Breakdowns():
                     if extension != "mp4":
                         image = Image.open(i)
                         st.image(image, use_column_width="always")
-                    else:
-                        video_file = open(i, 'rb')
-                        st.video(video_file)
+                    # else:
+                    #     video_file = open(i, 'rb')
+                    #     st.video(video_file)
 
                     # Apply a unique CSS class for each caption
                     css_class = f"caption-{caption.replace(' ', '-').lower()}"
