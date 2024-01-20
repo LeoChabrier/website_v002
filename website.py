@@ -400,8 +400,6 @@ class Projects_Breakdowns():
 
         button_container = st.empty()
         visible_buttons = []
-        hidden_buttons = [subdir for subdir in all_subdirectories]
-        hidden_buttons.reverse()
         clicked_button_label = None
         with button_container.container():
             for year, subdir in year_subfolders_dict.items():
@@ -437,6 +435,7 @@ class Projects_Breakdowns():
             st.session_state.current_subdirectory = clicked_button_label
 
         for subdir in visible_buttons:
+            print(subdir)
             matching_files = [file for file in all_files if subdir in file]
             text_file = [file for file in text_files if subdir in file]
 
@@ -447,34 +446,35 @@ class Projects_Breakdowns():
                 if str(text.split('\\')[-1]) == "details.txt":
                     with open(text, "r") as details:
                         loaded_details = details.read()
-                else:
-                    try:
-                        with open(text, "r") as link:
-                            loaded_link = link.readlines()
-                    except:
-                        pass
+                        st.write(loaded_details)
+            #     else:
+            #         try:
+            #             with open(text, "r") as link:
+            #                 loaded_link = link.readlines()
+            #         except:
+            #             pass
 
-            with col[1]:
-                st.write(f"About _{subdir}_ :\n\n{loaded_details}")
+            # with col[1]:
+            #     st.write(f"About _{subdir}_ :\n\n{loaded_details}")
 
-        #         for i in matching_files:
-        #             shot_name = str(i.split('\\')[-1]).split('.')[0]
-        #             image = Image.open(i)
-        #             st.image(image, use_column_width="always")
-        #             css_class = f"caption-{shot_name.replace(' ', '-').lower()}"
-        #             st.write(f'<div class="{css_class}">{shot_name}</div>', unsafe_allow_html=True)
-        #             title_alignment = f"""
-        #             <style>
-        #             .{css_class} {{
-        #                 text-align: center;
-        #             }}
-        #             </style>
-        #             """
-        #             st.markdown(title_alignment, unsafe_allow_html=True)
+                # for i in matching_files:
+                #     shot_name = str(i.split('\\')[-1]).split('.')[0]
+                #     image = Image.open(i)
+                #     st.image(image, use_column_width="always")
+                #     css_class = f"caption-{shot_name.replace(' ', '-').lower()}"
+                #     st.write(f'<div class="{css_class}">{shot_name}</div>', unsafe_allow_html=True)
+                #     title_alignment = f"""
+                #     <style>
+                #     .{css_class} {{
+                #         text-align: center;
+                #     }}
+                #     </style>
+                #     """
+                #     st.markdown(title_alignment, unsafe_allow_html=True)
                 
-        #         if loaded_link:
-        #             for link in loaded_link:
-        #                 st.video(link.split('\n')[0])
+                # if loaded_link:
+                #     for link in loaded_link:
+                #         st.video(link.split('\n')[0])
 
 
 class Coding_Dev():
