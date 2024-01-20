@@ -1,5 +1,5 @@
 from pathlib import Path
-import os
+from os import walk, path
 import streamlit as st
 import streamlit_option_menu as stop
 from PIL import Image
@@ -341,18 +341,18 @@ class Projects_Breakdowns():
 
     def get_all_image_files(self, directory):
         all_files = []
-        for dirpath, _, filenames in os.walk(directory):
+        for dirpath, _, filenames in walk(directory):
             for filename in filenames:
                 if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.mp4')):
-                    all_files.append(os.path.join(dirpath, filename))
+                    all_files.append(path.join(dirpath, filename))
         return all_files
 
     def get_text_file(self, directory):
         text_files = []
-        for dirpath, _, filenames in os.walk(directory):
+        for dirpath, _, filenames in walk(directory):
             for filename in filenames:
                 if filename.lower().endswith(('.txt')):
-                    text_files.append(os.path.join(dirpath, filename))
+                    text_files.append(path.join(dirpath, filename))
         return text_files
     
     def create_panel(self): 
@@ -374,13 +374,13 @@ class Projects_Breakdowns():
                     ''', unsafe_allow_html=True)
 
         directory = r'assets\achievements'
-        subdirectories = [d for d in next(os.walk(directory))[1]]
+        subdirectories = [d for d in next(walk(directory))[1]]
         year_subfolders_dict = {}
         all_subdirectories = []
 
         for year_folder in subdirectories:
-            year_folder_path = os.path.join(directory, year_folder)
-            sub_folders = next(os.walk(year_folder_path))[1]
+            year_folder_path = path.join(directory, year_folder)
+            sub_folders = next(walk(year_folder_path))[1]
 
             sub_folders.reverse()
             
@@ -419,11 +419,12 @@ class Projects_Breakdowns():
                             bottom = (original_image.height + new_height) // 2
                             cropped_image = original_image.crop((left, top, right, bottom))
                             st.image(cropped_image, use_column_width=True)
-                            if st.button(project_name, key=f'{project_name}_button'):
-                                clicked_button_label = project_name
-                                break
                         else : 
                             st.image(Image.new("RGB", (1920, 1080)))
+
+                        if st.button(project_name, key=f'{project_name}_button'):
+                            clicked_button_label = project_name
+                            break
         if clicked_button_label:
             col = st.columns([2,6,2])
             visible_buttons.append(clicked_button_label)
