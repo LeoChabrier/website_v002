@@ -456,10 +456,11 @@ class Projects_Breakdowns():
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
 
                 for i in matching_files:
+                    name = str(i.split('/')[-1])
                     image = Image.open(i)
                     st.image(image, use_column_width="always")
-                    css_class = f"caption-{i.replace(' ', '-').lower()}"
-                    st.write(f'<div class="{css_class}">{i}</div>', unsafe_allow_html=True)
+                    css_class = f"caption-{name.replace(' ', '-').lower()}"
+                    st.write(f'<div class="{css_class}">{name}</div>', unsafe_allow_html=True)
                     title_alignment = f"""
                     <style>
                     .{css_class} {{
