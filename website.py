@@ -464,7 +464,6 @@ class Projects_Breakdowns():
                     for link in loaded_link:
                         st.video(link.split('\n')[0])
 
-
 class Coding_Dev():
     def create_panel(self):
         st.header('_CODING/DEVELOPMENT_ :', divider='red')
