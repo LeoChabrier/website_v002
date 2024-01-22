@@ -453,7 +453,12 @@ class Projects_Breakdowns():
             #             pass
 
             for text in text_file:
-                if str(text.split('\\')[-1]) == "details.txt":
+                try : 
+                    detail_var = str(text.split('\\')[-1])
+                except : 
+                    detail_var = str(text.split('//')[-1])
+
+                if detail_var == "details.txt":
                     with open(text, "r") as details:
                         loaded_details = details.read()
                 else:
@@ -467,7 +472,10 @@ class Projects_Breakdowns():
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
 
                 for i in matching_files:
-                    name = str(i.split('\\')[-1]).split('.')[0]
+                    try :
+                        name = str(i.split('\\')[-1]).split('.')[0]
+                    except : 
+                        name = str(i.split('/')[-1]).split('.')[0]
                     image = Image.open(i)
                     st.image(image, use_column_width="always", caption=name)
                 
