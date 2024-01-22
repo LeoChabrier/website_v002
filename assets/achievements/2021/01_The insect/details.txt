@@ -1,0 +1,1 @@
+First time rendering an animation sequence, learning about rigging, alembics, xgen, compositing IDs and so on. Made with Maya, Nuke, Photoshop, Mudbox.
