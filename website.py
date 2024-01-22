@@ -349,9 +349,6 @@ class Demoreels_Widget():
         st.video(video_bytes)
 
 class Projects_Breakdowns():
-    def __init__(self):
-        super().__init__()
-
     @staticmethod
     @st.cache_resource
     def get_all_image_files(directory):
