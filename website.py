@@ -390,7 +390,7 @@ class Projects_Breakdowns():
             year_subfolders_dict[year_folder] = sub_folders[::-1]
             all_subdirectories.extend(sub_folders)
 
-        year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
+        year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), reverse=True))
 
         all_files = self.get_all_image_files(PROJECTS_BREAKDOWNS)
         text_files = self.get_text_file(PROJECTS_BREAKDOWNS)
