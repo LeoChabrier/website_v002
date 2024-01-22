@@ -441,24 +441,13 @@ class Projects_Breakdowns():
             loaded_details = None
             loaded_link = None
 
-            # for text in text_file:
-            #     if str(text.split('/')[-1]) == "details.txt":
-            #         with open(text, "r") as details:
-            #             loaded_details = details.read()
-            #     else:
-            #         try:
-            #             with open(text, "r") as link:
-            #                 loaded_link = link.readlines()
-            #         except:
-            #             pass
 
             for text in text_file:
-                try : 
-                    detail_var = str(text.split('\\')[-1])
-                except : 
-                    detail_var = str(text.split('/')[-1])
-
-                if detail_var == "details.txt":
+                try :
+                    text = text.replace("\\", "/")
+                except :
+                    pass
+                if str(text.split('/')[-1]) == "details.txt":
                     with open(text, "r") as details:
                         loaded_details = details.read()
                 else:
@@ -468,14 +457,16 @@ class Projects_Breakdowns():
                     except:
                         pass
 
+
             with col[1]:
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
 
                 for i in matching_files:
-                    try :
-                        name = str(i.split('\\')[-1]).split('.')[0]
-                    except : 
-                        name = str(i.split('/')[-1]).split('.')[0]
+                    try : 
+                        i = i.replace("\\", "/")
+                    except :
+                        pass
+                    name = str(i.split('/')[-1]).split('.')[0]
                     image = Image.open(i)
                     st.image(image, use_column_width="always", caption=name)
                 
