@@ -487,13 +487,13 @@ class Projects_Breakdowns():
 
     def get_all_image_files(self, directory):
         return [os.path.join(dirpath, filename)
-                for dirpath, _, filenames in walk(directory)
+                for dirpath, _, filenames in os.walk(directory)
                 for filename in filenames
                 if filename.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
     def get_text_file(self, directory):
         return [os.path.join(dirpath, filename)
-                for dirpath, _, filenames in walk(directory)
+                for dirpath, _, filenames in os.walk(directory)
                 for filename in filenames
                 if filename.lower().endswith(('.txt', ".json"))]
 
@@ -518,12 +518,12 @@ class Projects_Breakdowns():
                     </style>
                     ''', unsafe_allow_html=True)
 
-        subdirectories = [d for d in next(walk(PROJECTS_BREAKDOWNS))[1]]
+        subdirectories = [d for d in next(os.walk(PROJECTS_BREAKDOWNS))[1]]
         year_subfolders_dict = {}
 
         for year_folder in subdirectories:
             year_folder_path = os.path.join(PROJECTS_BREAKDOWNS, year_folder)
-            sub_folders = next(walk(year_folder_path))[1]
+            sub_folders = next(os.walk(year_folder_path))[1]
             sub_folders.sort()
             year_subfolders_dict[year_folder] = sub_folders
 
