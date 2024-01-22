@@ -352,19 +352,15 @@ class Projects_Breakdowns():
     def __init__(self):
         super().__init__()
 
-    @staticmethod
-    @st.cache_resource
-    def get_all_image_files(directory):
+    def get_all_image_files(self, directory):
         all_files = []
         for dirpath, _, filenames in os.walk(directory):
             for filename in filenames:
                 if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
                     all_files.append(os.path.join(dirpath, filename))
         return all_files
-    
-    @staticmethod
-    @st.cache_resource
-    def get_text_file(directory):
+
+    def get_text_file(self, directory):
         text_files = []
         for dirpath, _, filenames in os.walk(directory):
             for filename in filenames:
@@ -393,23 +389,22 @@ class Projects_Breakdowns():
                     </style>
                     ''', unsafe_allow_html=True)
 
-        # années
-        subdirectories = [d for d in os.listdir(PROJECTS_BREAKDOWNS) if os.path.isdir(os.path.join(PROJECTS_BREAKDOWNS, d))]
-
-        # ajout des sous dossiers de projet pour chaque année au dictionnaire
+        subdirectories = [d for d in next(os.walk(PROJECTS_BREAKDOWNS))[1]]
         year_subfolders_dict = {}
+
         for year_folder in subdirectories:
             year_folder_path = os.path.join(PROJECTS_BREAKDOWNS, year_folder)
-            sub_folders = sorted([d for d in os.listdir(year_folder_path) if os.path.isdir(os.path.join(year_folder_path, d))])
+            sub_folders = next(os.walk(year_folder_path))[1]
+            sub_folders.sort()
             year_subfolders_dict[year_folder] = sub_folders
 
-        # inversion de l'ordre des années
         year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
         all_files = self.get_all_image_files(PROJECTS_BREAKDOWNS)
         text_files = self.get_text_file(PROJECTS_BREAKDOWNS)
+
         st.header('*PROJECTS BREAKDOWNS* :', divider='red')
 
-        # 
+
         button_container = st.empty()
         visible_buttons = []
         clicked_button_label = None
@@ -420,8 +415,9 @@ class Projects_Breakdowns():
                 for col, sub_item in zip(columns, subdir):
                     with col:
                         matching_files = [file for file in all_files if sub_item in file]
+                        matching_files.sort()
+                        project_name = sub_item.split('_')[1]
                         if matching_files:
-                            matching_files.sort()
                             image_path = matching_files[0]
                             new_width = 1920
                             new_height = 1080
@@ -431,15 +427,10 @@ class Projects_Breakdowns():
                             right = (original_image.width + new_width) // 2
                             bottom = (original_image.height + new_height) // 2
                             cropped_image = original_image.crop((left, top, right, bottom))
-                            reduced_width = cropped_image.width // 8
-                            reduced_height = cropped_image.height // 8
-                            reduced_image = cropped_image.resize((reduced_width, reduced_height))
-
-                            st.image(reduced_image, use_column_width=True)
+                            st.image(cropped_image, use_column_width=True)
                         else : 
                             st.image(Image.new("RGB", (1920, 1080)))
 
-                        project_name = sub_item.split('_')[1]
                         if col.button(project_name, key=f'{project_name}_button'):
                             clicked_button_label = project_name
                             break
