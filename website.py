@@ -456,7 +456,7 @@ class Projects_Breakdowns():
                 try : 
                     detail_var = str(text.split('\\')[-1])
                 except : 
-                    detail_var = str(text.split('//')[-1])
+                    detail_var = str(text.split('/')[-1])
 
                 if detail_var == "details.txt":
                     with open(text, "r") as details:
