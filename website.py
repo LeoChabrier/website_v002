@@ -35,8 +35,8 @@ class Main_Interface():
         with st.sidebar:
             selected = stop.option_menu(
                 menu_title = "Welcome !",
-                options = ["About me","Get in touch","Demoreels","Projects breakdowns"]#,"Coding/Development"], # ,"Tutorials","Photography"
-                icons = ["house","envelope","camera-reels-fill","list-stars"] #,"terminal-fill"], # ,"eyeglasses","camera-fill"
+                options = ["About me","Get in touch","Demoreels","Projects breakdowns"],# "Coding/Development","Tutorials","Photography"],
+                icons = ["house","envelope","camera-reels-fill","list-stars"], #,"terminal-fill","eyeglasses","camera-fill"],
                 menu_icon = "cast", 
                 default_index = 0,
             )
