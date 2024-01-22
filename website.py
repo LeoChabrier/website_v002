@@ -388,7 +388,7 @@ class Projects_Breakdowns():
             # sub_folders.reverse()
             
             year_subfolders_dict[year_folder] = sub_folders
-            # all_subdirectories.extend(sub_folders)
+            all_subdirectories.extend(sub_folders)
 
         year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
 
@@ -441,8 +441,19 @@ class Projects_Breakdowns():
             loaded_details = None
             loaded_link = None
 
+            # for text in text_file:
+            #     if str(text.split('/')[-1]) == "details.txt":
+            #         with open(text, "r") as details:
+            #             loaded_details = details.read()
+            #     else:
+            #         try:
+            #             with open(text, "r") as link:
+            #                 loaded_link = link.readlines()
+            #         except:
+            #             pass
+
             for text in text_file:
-                if str(text.split('/')[-1]) == "details.txt":
+                if str(text.split('\\')[-1]) == "details.txt":
                     with open(text, "r") as details:
                         loaded_details = details.read()
                 else:
@@ -456,7 +467,7 @@ class Projects_Breakdowns():
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
 
                 for i in matching_files:
-                    name = str(i.split('/')[-1]).split('.')[0]
+                    name = str(i.split('\\')[-1]).split('.')[0]
                     image = Image.open(i)
                     st.image(image, use_column_width="always", caption=name)
                 
