@@ -386,11 +386,12 @@ class Projects_Breakdowns():
             sub_folders = next(walk(year_folder_path))[1]
 
             sub_folders.reverse()
+            print(sub_folders)
             
             year_subfolders_dict[year_folder] = sub_folders[::-1]
             all_subdirectories.extend(sub_folders)
 
-        year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item, reverse=True))
+        year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
 
         all_files = self.get_all_image_files(PROJECTS_BREAKDOWNS)
         text_files = self.get_text_file(PROJECTS_BREAKDOWNS)
@@ -403,6 +404,7 @@ class Projects_Breakdowns():
         clicked_button_label = None
         with button_container.container():
             for year, subdir in year_subfolders_dict.items():
+                print(subdir)
                 st.subheader(year, divider='red')
                 columns = st.columns(4)
                 for col, sub_item in zip(columns, subdir):
