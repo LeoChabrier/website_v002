@@ -385,10 +385,9 @@ class Projects_Breakdowns():
             year_folder_path = path.join(PROJECTS_BREAKDOWNS, year_folder)
             sub_folders = next(walk(year_folder_path))[1]
 
-            sub_folders.reverse()
-            print(sub_folders)
+            # sub_folders.reverse()
             
-            year_subfolders_dict[year_folder] = sub_folders[::-1]
+            year_subfolders_dict[year_folder] = sub_folders
             all_subdirectories.extend(sub_folders)
 
         year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
@@ -404,7 +403,6 @@ class Projects_Breakdowns():
         clicked_button_label = None
         with button_container.container():
             for year, subdir in year_subfolders_dict.items():
-                print(subdir)
                 st.subheader(year, divider='red')
                 columns = st.columns(4)
                 for col, sub_item in zip(columns, subdir):
