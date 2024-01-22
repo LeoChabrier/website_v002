@@ -385,12 +385,12 @@ class Projects_Breakdowns():
             year_folder_path = path.join(PROJECTS_BREAKDOWNS, year_folder)
             sub_folders = next(walk(year_folder_path))[1]
 
-            # sub_folders.reverse()
+            sub_folders.reverse()
             
             year_subfolders_dict[year_folder] = sub_folders[::-1]
             all_subdirectories.extend(sub_folders)
 
-        year_subfolders_dict = dict(year_subfolders_dict.items(), reverse=True)
+        year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
 
         all_files = self.get_all_image_files(PROJECTS_BREAKDOWNS)
         text_files = self.get_text_file(PROJECTS_BREAKDOWNS)
