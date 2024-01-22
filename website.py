@@ -427,8 +427,8 @@ class Projects_Breakdowns():
                             right = (original_image.width + new_width) // 2
                             bottom = (original_image.height + new_height) // 2
                             cropped_image = original_image.crop((left, top, right, bottom))
-                            reduced_width = cropped_image.width // 16
-                            reduced_height = cropped_image.height // 16
+                            reduced_width = cropped_image.width // 10
+                            reduced_height = cropped_image.height // 10
                             reduced_image = cropped_image.resize((reduced_width, reduced_height))
 
                             st.image(reduced_image, use_column_width=True)
