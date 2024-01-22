@@ -403,6 +403,7 @@ class Projects_Breakdowns():
                 for col, sub_item in zip(columns, subdir):
                     with col:
                         matching_files = [file for file in all_files if sub_item in file]
+                        matching_files.sort()
                         project_name = sub_item.split('_')[1]
                         if matching_files:
                             image_path = matching_files[0]
@@ -431,11 +432,11 @@ class Projects_Breakdowns():
 
         for subdir in visible_buttons:
             matching_files = [file for file in all_files if subdir in file]
+            matching_files.sort()
             text_file = [file for file in text_files if subdir in file]
 
             loaded_details = None
             loaded_link = None
-
 
             for text in text_file:
                 try :
@@ -455,7 +456,6 @@ class Projects_Breakdowns():
 
             with col[1]:
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
-
                 for i in matching_files:
                     try : 
                         i = i.replace("\\", "/")
