@@ -4,7 +4,7 @@ import streamlit_option_menu as stop
 from smtplib import SMTP
 from PIL import Image
 from pathlib import Path
-from os import walk, path
+import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -348,26 +348,155 @@ class Demoreels_Widget():
         video_bytes = video_file.read()
         st.video(video_bytes)
 
+# class Projects_Breakdowns():
+#     def __init__(self):
+#         super().__init__()
+
+#     def get_all_image_files(self, directory):
+#         all_files = []
+#         for dirpath, _, filenames in walk(directory):
+#             for filename in filenames:
+#                 if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+#                     all_files.append(path.join(dirpath, filename))
+#         return all_files
+
+#     def get_text_file(self, directory):
+#         text_files = []
+#         for dirpath, _, filenames in walk(directory):
+#             for filename in filenames:
+#                 if filename.lower().endswith(('.txt', ".json")):
+#                     text_files.append(path.join(dirpath, filename))
+#         return text_files
+    
+#     def create_panel(self):
+#         st.markdown(
+#             """
+#             <style>
+#             div.stButton > button {
+#                 width: 100%;
+#                 display: block;
+#                 margin: auto;
+#             }
+#             </style>
+#             """,
+#             unsafe_allow_html=True,
+#         )
+
+#         st.markdown('''
+#                     <style>
+#                     button[title="View fullscreen"]{
+#                         visibility: hidden;}
+#                     </style>
+#                     ''', unsafe_allow_html=True)
+
+#         subdirectories = [d for d in next(walk(PROJECTS_BREAKDOWNS))[1]]
+#         year_subfolders_dict = {}
+
+#         for year_folder in subdirectories:
+#             year_folder_path = path.join(PROJECTS_BREAKDOWNS, year_folder)
+#             sub_folders = next(walk(year_folder_path))[1]
+#             sub_folders.sort()
+#             year_subfolders_dict[year_folder] = sub_folders
+
+#         year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
+#         all_files = self.get_all_image_files(PROJECTS_BREAKDOWNS)
+#         text_files = self.get_text_file(PROJECTS_BREAKDOWNS)
+
+#         st.header('*PROJECTS BREAKDOWNS* :', divider='red')
+
+
+#         button_container = st.empty()
+#         visible_buttons = []
+#         clicked_button_label = None
+#         with button_container.container():
+#             for year, subdir in year_subfolders_dict.items():
+#                 st.subheader(year, divider='red')
+#                 columns = st.columns(4)
+#                 for col, sub_item in zip(columns, subdir):
+#                     with col:
+#                         matching_files = [file for file in all_files if sub_item in file]
+#                         matching_files.sort()
+#                         project_name = sub_item.split('_')[1]
+#                         if matching_files:
+#                             image_path = matching_files[0]
+#                             new_width = 1920
+#                             new_height = 1080
+#                             original_image = Image.open(image_path)
+#                             left = (original_image.width - new_width) // 2
+#                             top = (original_image.height - new_height) // 2
+#                             right = (original_image.width + new_width) // 2
+#                             bottom = (original_image.height + new_height) // 2
+#                             cropped_image = original_image.crop((left, top, right, bottom))
+#                             st.image(cropped_image, use_column_width=True)
+#                         else : 
+#                             st.image(Image.new("RGB", (1920, 1080)))
+
+#                         if col.button(project_name, key=f'{project_name}_button'):
+#                             clicked_button_label = project_name
+#                             break
+                        
+#         if clicked_button_label:
+#             col = st.columns([2,6,2])
+#             visible_buttons.append(clicked_button_label)
+#             button_container.button("Back to gallery")
+
+#             st.session_state.current_subdirectory = clicked_button_label
+
+#         for subdir in visible_buttons:
+#             matching_files = [file for file in all_files if subdir in file]
+#             matching_files.sort()
+#             text_file = [file for file in text_files if subdir in file]
+
+#             loaded_details = None
+#             loaded_link = None
+
+#             for text in text_file:
+#                 try :
+#                     text = text.replace("\\", "/")
+#                 except :
+#                     pass
+#                 if str(text.split('/')[-1]) == "details.txt":
+#                     with open(text, "r") as details:
+#                         loaded_details = details.read()
+#                 else:
+#                     try:
+#                         with open(text, "r") as link:
+#                             loaded_link = link.readlines()
+#                     except:
+#                         pass
+
+
+#             with col[1]:
+#                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
+#                 for i in matching_files:
+#                     try : 
+#                         i = i.replace("\\", "/")
+#                     except :
+#                         pass
+#                     name = str(i.split('/')[-1]).split('.')[0]
+#                     image = Image.open(i)
+#                     st.image(image, use_column_width="always", caption=name)
+                
+#                 if loaded_link:
+#                     for link in loaded_link:
+#                         st.video(link.split('\n')[0])
+
 class Projects_Breakdowns():
     def __init__(self):
         super().__init__()
 
     def get_all_image_files(self, directory):
-        all_files = []
-        for dirpath, _, filenames in walk(directory):
-            for filename in filenames:
-                if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
-                    all_files.append(path.join(dirpath, filename))
-        return all_files
+        return [os.path.join(dirpath, filename)
+                for dirpath, _, filenames in walk(directory)
+                for filename in filenames
+                if filename.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
     def get_text_file(self, directory):
-        text_files = []
-        for dirpath, _, filenames in walk(directory):
-            for filename in filenames:
-                if filename.lower().endswith(('.txt', ".json")):
-                    text_files.append(path.join(dirpath, filename))
-        return text_files
-    
+        return [os.path.join(dirpath, filename)
+                for dirpath, _, filenames in walk(directory)
+                for filename in filenames
+                if filename.lower().endswith(('.txt', ".json"))]
+
     def create_panel(self):
         st.markdown(
             """
@@ -393,7 +522,7 @@ class Projects_Breakdowns():
         year_subfolders_dict = {}
 
         for year_folder in subdirectories:
-            year_folder_path = path.join(PROJECTS_BREAKDOWNS, year_folder)
+            year_folder_path = os.path.join(PROJECTS_BREAKDOWNS, year_folder)
             sub_folders = next(walk(year_folder_path))[1]
             sub_folders.sort()
             year_subfolders_dict[year_folder] = sub_folders
@@ -404,10 +533,10 @@ class Projects_Breakdowns():
 
         st.header('*PROJECTS BREAKDOWNS* :', divider='red')
 
-
         button_container = st.empty()
         visible_buttons = []
         clicked_button_label = None
+
         with button_container.container():
             for year, subdir in year_subfolders_dict.items():
                 st.subheader(year, divider='red')
@@ -428,15 +557,15 @@ class Projects_Breakdowns():
                             bottom = (original_image.height + new_height) // 2
                             cropped_image = original_image.crop((left, top, right, bottom))
                             st.image(cropped_image, use_column_width=True)
-                        else : 
+                        else:
                             st.image(Image.new("RGB", (1920, 1080)))
 
                         if col.button(project_name, key=f'{project_name}_button'):
                             clicked_button_label = project_name
                             break
-                        
+
         if clicked_button_label:
-            col = st.columns([2,6,2])
+            col = st.columns([2, 6, 2])
             visible_buttons.append(clicked_button_label)
             button_container.button("Back to gallery")
 
@@ -451,9 +580,9 @@ class Projects_Breakdowns():
             loaded_link = None
 
             for text in text_file:
-                try :
+                try:
                     text = text.replace("\\", "/")
-                except :
+                except:
                     pass
                 if str(text.split('/')[-1]) == "details.txt":
                     with open(text, "r") as details:
@@ -465,18 +594,17 @@ class Projects_Breakdowns():
                     except:
                         pass
 
-
             with col[1]:
                 st.write(f"About _{subdir}_ :\n\n{loaded_details}")
                 for i in matching_files:
-                    try : 
+                    try:
                         i = i.replace("\\", "/")
-                    except :
+                    except:
                         pass
                     name = str(i.split('/')[-1]).split('.')[0]
                     image = Image.open(i)
                     st.image(image, use_column_width="always", caption=name)
-                
+
                 if loaded_link:
                     for link in loaded_link:
                         st.video(link.split('\n')[0])
