@@ -326,7 +326,7 @@ class Demoreels_Widget():
 
         with second_cols[0]:
             st.caption(':red[_Lookdev Demoreel_] 🎨🔎')
-            st.video("https://youtu.be/_Oi5iOdNe-o")
+            st.video("https://www.youtube.com/watch?v=zIsjDpLtXro")
             lookdev_expander = st.expander("Details : ", expanded=False)
             with lookdev_expander:
                 st.caption("This demoreel contains lots of assets i've been working on, from modeling to shading.")
