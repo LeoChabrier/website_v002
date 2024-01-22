@@ -331,6 +331,18 @@ class Demoreels_Widget():
             with lookdev_expander:
                 st.caption("This demoreel contains lots of assets i've been working on, from modeling to shading.")
 
+        third_cols = st.columns(2)
+
+        with third_cols[0]:
+            st.caption(':red[_Compositing Demoreel_] 🎨🔎')
+            st.title("COMING SOON")
+            # st.video("https://www.youtube.com/watch?v=zIsjDpLtXro")
+            compositing_expander = st.expander("Details : ", expanded=False)
+            with compositing_expander:
+                st.caption("This demoreel contains mostly some VFX shots i've been working on in compositing.")
+
+        
+
     def load_video(self, video):
         video_file = open(video, 'rb')
         video_bytes = video_file.read()
