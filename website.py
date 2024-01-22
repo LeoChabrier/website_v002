@@ -388,7 +388,7 @@ class Projects_Breakdowns():
             # sub_folders.reverse()
             
             year_subfolders_dict[year_folder] = sub_folders
-            all_subdirectories.extend(sub_folders)
+            # all_subdirectories.extend(sub_folders)
 
         year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
 
