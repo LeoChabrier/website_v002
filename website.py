@@ -318,11 +318,11 @@ class Demoreels_Widget():
         second_cols = st.columns(2)
 
         with second_cols[1]:
-            st.caption(':red[_Houdini TD Demoreel_] 🌷🔥💧⚡❄🌊')
+            st.caption(':red[_Compositing Demoreel_] 🎥📹🎦')
             st.title("COMING SOON")
-            fx_expander = st.expander("Details : ", expanded=False)
-            with fx_expander:
-                st.caption("This demoreel contains Houdini pipelines i've been working on, RnD and HDA system i've done.")
+            compositing_expander = st.expander("Details : ", expanded=False)
+            with compositing_expander:
+                st.caption("This demoreel contains mostly some VFX shots i've been working on in compositing.")
 
         with second_cols[0]:
             st.caption(':red[_Lookdev Demoreel_] 🎨🔎')
@@ -334,12 +334,11 @@ class Demoreels_Widget():
         third_cols = st.columns(2)
 
         with third_cols[0]:
-            st.caption(':red[_Compositing Demoreel_] 🎥📹🎦')
+            st.caption(':red[_Houdini TD Demoreel_] 🌷🔥💧⚡❄🌊')
             st.title("COMING SOON")
-            # st.video("https://www.youtube.com/watch?v=zIsjDpLtXro")
-            compositing_expander = st.expander("Details : ", expanded=False)
-            with compositing_expander:
-                st.caption("This demoreel contains mostly some VFX shots i've been working on in compositing.")
+            fx_expander = st.expander("Details : ", expanded=False)
+            with fx_expander:
+                st.caption("This demoreel contains Houdini pipelines i've been working on, RnD and HDA system i've done.")
 
         
 
