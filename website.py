@@ -22,7 +22,7 @@ PROJECTS_BREAKDOWNS = ASSETS / "achievements"
 class Main_Interface():
     def __init__(self):
         super().__init__()
-        # st.set_page_config(page_title = "Léo Chabrier", layout="wide")
+        st.set_page_config(page_title = "Léo Chabrier website", layout="wide")
 
         self.about_me_widget = AboutMe_Widgets()
         self.contacts_widget = GetInTouch_Widgets()
@@ -30,9 +30,10 @@ class Main_Interface():
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
 
-        with open("index.html", "r", encoding='utf-8') as html_file :
+        with open("index.html", "r", encoding='utf-8') as html_file:
             source_code = html_file.read()
-            components.html(source_code)
+            st.markdown(source_code, unsafe_allow_html=True)
+
 
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
