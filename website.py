@@ -18,14 +18,14 @@ DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
 LOTTIE_ANIMATION = ASSETS / "hello-october.json"
 PROJECTS_BREAKDOWNS = ASSETS / "achievements"
 
-# html_file = open("index.html", "r", encoding='utf-8')
-# source_code = html_file.read()
-# components.html(source_code)
+html_file = open("index.html", "r", encoding='utf-8')
+source_code = html_file.read()
+components.html(source_code)
 
 class Main_Interface():
     def __init__(self):
         super().__init__()
-        st.set_page_config(page_title = "toatata", layout="wide")
+        st.set_page_config(layout="wide")
 
         self.about_me_widget = AboutMe_Widgets()
         self.contacts_widget = GetInTouch_Widgets()
