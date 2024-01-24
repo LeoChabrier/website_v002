@@ -32,7 +32,7 @@ class Main_Interface():
 
         with open("index.html", "r") as f :
             source_code = f.read()
-            components.html(source_code, height=0)
+            components.html(source_code, height=0, width=0)
 
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
