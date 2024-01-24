@@ -28,19 +28,19 @@ class Main_Interface():
         self.demoreel_widget = Demoreels_Widget()
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
-        linkedin_preview_image_url = "https://leo-chabrier.streamlit.app/~/+/media/75cb66bd177dcad62f247ae09ba67972fe75ed3bd05894211d1284c3.jpg"
-        st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
+        with open(CSS_FILE) as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+        preview_image_url = "https://leo-chabrier.streamlit.app/~/+/media/75cb66bd177dcad62f247ae09ba67972fe75ed3bd05894211d1284c3.jpg"
+
         st.markdown(f"""
         <head>
             <!-- Autres balises meta ... -->
-            <meta property="og:image" content="{linkedin_preview_image_url}" />
-            <meta property="og:image:width" content="1200" />  <!-- Largeur recommandée -->
-            <meta property="og:image:height" content="628" />  <!-- Hauteur recommandée -->
+            <meta property="og:image" content="{preview_image_url}" />
+            <meta property="twitter:image" content="{preview_image_url}" />
             <!-- Autres balises meta ... -->
         </head>
         """, unsafe_allow_html=True)
-        with open(CSS_FILE) as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     def buttons(self):
         with st.sidebar:
