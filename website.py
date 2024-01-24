@@ -31,14 +31,39 @@ class Main_Interface():
 
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-            
+
+        preview_image_url = "https://metatags.io/images/meta-tags.png"
+
         st.markdown(f"""
         <head>
-            <meta property='og:type' content="website"/>
-            <meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/51cdafc4e4b09eb676a64e68/14d587cf-008b-403e-aa2d-78a0d91c98cf/Home_Lower-elio.jpg"/>
-            <meta property="og:url" content="https://leo-chabrier.streamit.app"/>
+            <!-- Primary Meta Tags -->
+            <title>Meta Tags — Preview, Edit and Generate</title>
+            <meta name="title" content="Meta Tags — Preview, Edit and Generate" />
+            <meta name="description" content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!" />
+
+            <!-- Open Graph / Facebook -->
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://leo-chabrier.streamlit.app/" />
+            <meta property="og:title" content="Meta Tags — Preview, Edit and Generate" />
+            <meta property="og:description" content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!" />
+            <meta property="og:image" content="{preview_image_url}" />
+
+            <!-- Twitter -->
+            <meta property="twitter:card" content="summary_large_image" />
+            <meta property="twitter:url" content="https://leo-chabrier.streamlit.app/" />
+            <meta property="twitter:title" content="Meta Tags — Preview, Edit and Generate" />
+            <meta property="twitter:description" content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!" />
+            <meta property="twitter:image" content="{preview_image_url}" />
         </head>
         """, unsafe_allow_html=True)
+
+        # st.markdown(f"""
+        # <head>
+        #     <meta property='og:type' content="website"/>
+        #     <meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/51cdafc4e4b09eb676a64e68/14d587cf-008b-403e-aa2d-78a0d91c98cf/Home_Lower-elio.jpg"/>
+        #     <meta property="og:url" content="https://leo-chabrier.streamit.app"/>
+        # </head>
+        # """, unsafe_allow_html=True)
 
     def buttons(self):
         with st.sidebar:
