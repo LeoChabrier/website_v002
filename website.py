@@ -32,7 +32,7 @@ class Main_Interface():
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-        preview_image_url = "https://leo-chabrier.streamlit.app/~/+/media/75cb66bd177dcad62f247ae09ba67972fe75ed3bd05894211d1284c3.jpg"
+        preview_image_url = "https://images.squarespace-cdn.com/content/v1/51cdafc4e4b09eb676a64e68/14d587cf-008b-403e-aa2d-78a0d91c98cf/Home_Lower-elio.jpg"
 
         st.markdown(f"""
         <head>
