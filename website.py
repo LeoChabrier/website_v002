@@ -28,6 +28,7 @@ class Main_Interface():
         self.demoreel_widget = Demoreels_Widget()
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
+        
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
@@ -36,8 +37,9 @@ class Main_Interface():
         st.markdown(f"""
         <head>
             <!-- Autres balises meta ... -->
-            <meta property="og:image" content="{preview_image_url}" />
-            <meta property="twitter:image" content="{preview_image_url}" />
+            <meta name='type' property='og:type' content="website"/>
+            <meta name='image' property="og:image" content="{preview_image_url}" />
+            <meta name='url' property="og:url" content="https://leo-chabrier.streamit.app" />
             <!-- Autres balises meta ... -->
         </head>
         """, unsafe_allow_html=True)
