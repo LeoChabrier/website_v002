@@ -30,27 +30,27 @@ class Main_Interface():
         self.coding_dev = Coding_Dev()
         st.markdown("""
 <!-- Primary Meta Tags -->
-<title></title>
-<meta name="title" content="" />
-<meta name="description" content="" />
+<head>
+    <title></title>
+    <meta name="title" content="" />
+    <meta name="description" content="" />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://leo-chabrier.streamlit.app/" />
-<meta property="og:title" content="" />
-<meta property="og:description" content="" />
-<meta property="og:image" content="https://leo-chabrier.streamlit.app/~/+/media/75cb66bd177dcad62f247ae09ba67972fe75ed3bd05894211d1284c3.jpg" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://leo-chabrier.streamlit.app/" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="https://leo-chabrier.streamlit.app/~/+/media/75cb66bd177dcad62f247ae09ba67972fe75ed3bd05894211d1284c3.jpg" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://leo-chabrier.streamlit.app/" />
-<meta property="twitter:title" content="" />
-<meta property="twitter:description" content="" />
-<meta property="twitter:image" content="https://leo-chabrier.streamlit.app/~/+/media/75cb66bd177dcad62f247ae09ba67972fe75ed3bd05894211d1284c3.jpg" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://leo-chabrier.streamlit.app/" />
+    <meta property="twitter:title" content="" />
+    <meta property="twitter:description" content="" />
+    <meta property="twitter:image" content="https://leo-chabrier.streamlit.app/~/+/media/75cb66bd177dcad62f247ae09ba67972fe75ed3bd05894211d1284c3.jpg" />
 
-<!-- Meta Tags Generated with https://metatags.io -->
-
-
+    <!-- Meta Tags Generated with https://metatags.io -->
+</head>
 """, unsafe_allow_html=True)
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
