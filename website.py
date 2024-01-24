@@ -30,7 +30,7 @@ class Main_Interface():
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
 
-        with open("index.html") as html_file :
+        with open("index.html", 'r', encoding="utf-8") as html_file :
             st.markdown(f"<style>{html_file.read()}</style>", unsafe_allow_html=True)
             st.write(f"{html_file.read()}")
 
