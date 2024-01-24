@@ -33,9 +33,8 @@ class Main_Interface():
         with open("index.html", "r", encoding='utf-8') as html_file :
             source_code = html_file.read()
             components.html(source_code)
-
-        with open(CSS_FILE) as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+        # with open(CSS_FILE) as f:
+        #     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     def buttons(self):
         with st.sidebar:
