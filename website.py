@@ -32,11 +32,10 @@ class Main_Interface():
 
         with open("index.html", "r") as f :
             source_code = f.read()
-            # components.html(source_code)
-            st.markdown(f"{f.read()}", unsafe_allow_html=True)
+            components.html(source_code)
 
-        # with open(CSS_FILE) as f:
-        #     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+        with open(CSS_FILE) as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     def buttons(self):
         with st.sidebar:
