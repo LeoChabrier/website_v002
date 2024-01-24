@@ -18,21 +18,20 @@ DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
 LOTTIE_ANIMATION = ASSETS / "hello-october.json"
 PROJECTS_BREAKDOWNS = ASSETS / "achievements"
 
+html_file = open("index.html", "r", encoding='utf-8')
+source_code = html_file.read()
+components.html(source_code)
 
 class Main_Interface():
     def __init__(self):
         super().__init__()
-        st.set_page_config(page_title = "Léo Chabrier", layout="wide")
+        st.set_page_config(page_title = "Léo Chabrier Website", layout="wide")
 
         self.about_me_widget = AboutMe_Widgets()
         self.contacts_widget = GetInTouch_Widgets()
         self.demoreel_widget = Demoreels_Widget()
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
-
-        html_file = open("index.html", "r", encoding='utf-8')
-        source_code = html_file.read()
-        components.html(source_code)
 
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
