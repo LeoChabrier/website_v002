@@ -34,7 +34,6 @@ class Main_Interface():
             source_code = html_file.read()
             st.markdown(source_code, unsafe_allow_html=True)
 
-
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
