@@ -1,12 +1,12 @@
 
 import streamlit as st
-import streamlit_option_menu
 from smtplib import SMTP
 from PIL import Image
 from pathlib import Path
 import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import streamlit_option_menu
 
 THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
