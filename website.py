@@ -32,8 +32,12 @@ class Main_Interface():
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
             
-        st.markdown(f"""
+        st.markdown("""
         <head>
+            <title>Meta Tags — Preview, Edit and Generate</title>
+            <meta name="title" content="Meta Tags — Preview, Edit and Generate" />
+            <meta name="description" content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!" />
+
             <meta property='og:type' content="website"/>
             <meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/51cdafc4e4b09eb676a64e68/14d587cf-008b-403e-aa2d-78a0d91c98cf/Home_Lower-elio.jpg"/>
             <meta property="og:url" content="https://leo-chabrier.streamit.app"/>
