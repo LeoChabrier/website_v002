@@ -29,7 +29,7 @@ class Main_Interface():
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
         linkedin_preview_image_url = "https://leo-chabrier.streamlit.app/~/+/media/75cb66bd177dcad62f247ae09ba67972fe75ed3bd05894211d1284c3.jpg"
-
+        st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
         st.markdown(f"""
         <head>
             <!-- Autres balises meta ... -->
