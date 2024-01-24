@@ -22,7 +22,7 @@ PROJECTS_BREAKDOWNS = ASSETS / "achievements"
 class Main_Interface():
     def __init__(self):
         super().__init__()
-        st.set_page_config(page_title = "Léo Chabrier", layout="wide")
+        st.set_page_config(layout="wide")
 
         self.about_me_widget = AboutMe_Widgets()
         self.contacts_widget = GetInTouch_Widgets()
