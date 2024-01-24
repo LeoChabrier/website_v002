@@ -1,6 +1,6 @@
 
 import streamlit as st
-import streamlit_option_menu as stop
+import streamlit_option_menu
 from smtplib import SMTP
 from PIL import Image
 from pathlib import Path
@@ -44,7 +44,7 @@ class Main_Interface():
 
     def buttons(self):
         with st.sidebar:
-            selected = stop.option_menu(
+            selected = streamlit_option_menu.option_menu(
                 menu_title = "Welcome !",
                 options = ["About me","Get in touch","Demoreels","Projects breakdowns"],# "Coding/Development","Tutorials","Photography"],
                 icons = ["house","envelope","camera-reels-fill","list-stars"], #,"terminal-fill","eyeglasses","camera-fill"],
