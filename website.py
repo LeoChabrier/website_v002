@@ -7,6 +7,7 @@ import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import streamlit_option_menu
+import streamlit.components.v1 as components
 
 THIS_DIR = Path(__file__).parent
 CSS_FILE = THIS_DIR / "style" / "style.css"
@@ -28,6 +29,11 @@ class Main_Interface():
         self.demoreel_widget = Demoreels_Widget()
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
+
+        html_file = open("index.html", "r", encoding='utf-8')
+        source_code = html_file.read()
+        components.html(source_code)
+
 
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
