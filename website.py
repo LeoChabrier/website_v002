@@ -31,14 +31,12 @@ class Main_Interface():
 
         with open(CSS_FILE) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-        preview_image_url = "https://images.squarespace-cdn.com/content/v1/51cdafc4e4b09eb676a64e68/14d587cf-008b-403e-aa2d-78a0d91c98cf/Home_Lower-elio.jpg"
-
+            
         st.markdown(f"""
         <head>
-            <meta name='type' property='og:type' content="website"/>
-            <meta name='image' property="og:image" content="{preview_image_url}"/>
-            <meta name='url' property="og:url" content="https://leo-chabrier.streamit.app"/>
+            <meta property='og:type' content="website"/>
+            <meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/51cdafc4e4b09eb676a64e68/14d587cf-008b-403e-aa2d-78a0d91c98cf/Home_Lower-elio.jpg"/>
+            <meta property="og:url" content="https://leo-chabrier.streamit.app"/>
         </head>
         """, unsafe_allow_html=True)
 
