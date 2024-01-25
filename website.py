@@ -309,7 +309,7 @@ class Demoreels_Widget():
 
         with cols[0]:
             st.caption(':red[_Lighting Demoreel_] 🪔🕯💡🔦🏮🎥🎬')
-            st.video("https://youtu.be/PQhgePNkOsk")
+            st.video("https://youtu.be/xjPHYP69lQ4")
             lighting_expander = st.expander("Details : ", expanded=False)
             with lighting_expander:
                 st.caption("This demoreel contains lots of shots I've worked on during my formation at ESMA. Even if it's a lighting/compositing oriented reel, I've been often working on lot of others aspects.")
