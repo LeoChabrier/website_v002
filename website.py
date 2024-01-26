@@ -328,7 +328,8 @@ class Demoreels_Widget():
 
         with second_cols[1]:
             st.caption(':red[_Compositing Demoreel_] 🎥📹🎦')
-            st.title("COMING SOON")
+            # st.title("COMING SOON")
+            st.video("https://youtu.be/LKW-QGhhoYc")
             compositing_expander = st.expander("Details : ", expanded=False)
             with compositing_expander:
                 st.caption("This demoreel contains mostly some VFX shots i've been working on in compositing.")
