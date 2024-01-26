@@ -20,9 +20,9 @@ PROJECTS_BREAKDOWNS = ASSETS / "achievements"
 
 
 
-# with open("index.html", "r") as f :
-#     source_code = f.read()
-#     components.html(source_code, height=0, width=0)
+with open("index.html", "r") as f :
+    source_code = f.read()
+    components.html(source_code, height=0, width=0)
     
 class Main_Interface():
     def __init__(self):
