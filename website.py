@@ -33,8 +33,8 @@ class Main_Interface():
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
 
-        with open(CSS_FILE) as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+        # with open(CSS_FILE) as f:
+        #     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
         # with open("index.html", "r") as f :
         #     source_code = f.read()
