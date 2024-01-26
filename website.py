@@ -419,33 +419,38 @@ class Projects_Breakdowns():
         with button_container.container():
             for year, subdir in year_subfolders_dict.items():
                 st.subheader(year, divider='red')
-                columns = st.columns(4)
-                for col, sub_item in zip(columns, subdir):
-                    with col:
-                        matching_files = [file for file in all_files if sub_item in file]
-                        matching_files.sort()
-                        project_name = sub_item.split('_')[1]
-                        if matching_files:
-                            image_path = matching_files[0]
-                            new_width = 1920
-                            new_height = 1080
-                            original_image = Image.open(image_path)
-                            left = (original_image.width - new_width) // 2
-                            top = (original_image.height - new_height) // 2
-                            right = (original_image.width + new_width) // 2
-                            bottom = (original_image.height + new_height) // 2
-                            cropped_image = original_image.crop((left, top, right, bottom))
-                            reduced_width = cropped_image.width // 10
-                            reduced_height = cropped_image.height // 10
-                            reduced_image = cropped_image.resize((reduced_width, reduced_height))
+                # Divide subdir into chunks of size 4
+                chunks = [subdir[i:i+4] for i in range(0, len(subdir), 4)]
 
-                            st.image(reduced_image, use_column_width=True)
-                        else : 
-                            st.image(Image.new("RGB", (1920, 1080)))
+                # Iterate over each chunk
+                for chunk in chunks:
+                    columns = st.columns(4)
+                    for col, sub_item in zip(columns, chunk):
+                        with col:
+                            matching_files = [file for file in all_files if sub_item in file]
+                            matching_files.sort()
+                            project_name = sub_item.split('_')[1]
+                            if matching_files:
+                                image_path = matching_files[0]
+                                new_width = 1920
+                                new_height = 1080
+                                original_image = Image.open(image_path)
+                                left = (original_image.width - new_width) // 2
+                                top = (original_image.height - new_height) // 2
+                                right = (original_image.width + new_width) // 2
+                                bottom = (original_image.height + new_height) // 2
+                                cropped_image = original_image.crop((left, top, right, bottom))
+                                reduced_width = cropped_image.width // 10
+                                reduced_height = cropped_image.height // 10
+                                reduced_image = cropped_image.resize((reduced_width, reduced_height))
 
-                        if col.button(project_name, key=f'{project_name}_button'):
-                            clicked_button_label = project_name
-                            break
+                                st.image(reduced_image, use_column_width=True)
+                            else : 
+                                st.image(Image.new("RGB", (1920, 1080)))
+
+                            if col.button(project_name, key=f'{project_name}_button'):
+                                clicked_button_label = project_name
+                                break
                         
         if clicked_button_label:
             col = st.columns([2,6,2])
