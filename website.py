@@ -19,6 +19,11 @@ LOTTIE_ANIMATION = ASSETS / "hello-october.json"
 PROJECTS_BREAKDOWNS = ASSETS / "achievements"
 
 
+
+with open("index.html", "r") as f :
+    source_code = f.read()
+    components.html(source_code, height=0, width=0)
+    
 class Main_Interface():
     def __init__(self):
         super().__init__()
@@ -29,13 +34,9 @@ class Main_Interface():
         self.demoreel_widget = Demoreels_Widget()
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
-
-        with open("index.html", "r") as f :
-            source_code = f.read()
-            components.html(source_code, height=0, width=0)
-
-        with open(CSS_FILE) as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+        
+        # with open(CSS_FILE) as f:
+        #     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     def buttons(self):
         with st.sidebar:
