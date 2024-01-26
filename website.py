@@ -20,9 +20,9 @@ PROJECTS_BREAKDOWNS = ASSETS / "achievements"
 
 
 
-with open("index.html", "r") as f :
-    source_code = f.read()
-    components.html(source_code, height=0, width=0)
+# with open("index.html", "r") as f :
+#     source_code = f.read()
+#     components.html(source_code, height=0, width=0)
     
 class Main_Interface():
     def __init__(self):
@@ -34,7 +34,7 @@ class Main_Interface():
         self.demoreel_widget = Demoreels_Widget()
         self.projects_breakdowns = Projects_Breakdowns()
         self.coding_dev = Coding_Dev()
-        
+
         # with open(CSS_FILE) as f:
         #     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
