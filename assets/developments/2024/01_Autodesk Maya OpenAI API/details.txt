@@ -1,0 +1,1 @@
+First version of an external application connected to maya through command ports, and sending ChatGPT Python scripts directly into Maya.

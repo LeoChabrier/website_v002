@@ -1,0 +1,1 @@
+Tool developed for Eastern short film, to control resolution size of textures in heavy scenes, quickly return XML datas for render layers, and manage alembics import/exports.

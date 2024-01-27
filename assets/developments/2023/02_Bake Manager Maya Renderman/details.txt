@@ -1,0 +1,1 @@
+Tool developed for Renderman/Autodesk Maya with Python, Qt Designer and PySide2, to help rendering artists to quickly bake automatically multiples materials in scene at once.

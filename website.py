@@ -17,10 +17,7 @@ CV = ASSETS / "CHABRIER_Léo_Curriculum_Vitae.pdf"
 DIPLOME = ASSETS / "CHABRIER_Léo_diplôme_ESMA.png"
 LOTTIE_ANIMATION = ASSETS / "hello-october.json"
 PROJECTS_BREAKDOWNS = ASSETS / "achievements"
-
-
-
-
+DEV_PROJECTS = ASSETS / "developments"
     
 class Main_Interface():
     def __init__(self):
@@ -44,8 +41,8 @@ class Main_Interface():
         with st.sidebar:
             selected = streamlit_option_menu.option_menu(
                 menu_title = "Welcome !",
-                options = ["About me","Get in touch","Demoreels","Projects breakdowns"],# "Coding/Development","Tutorials","Photography"],
-                icons = ["house","envelope","camera-reels-fill","list-stars"], #,"terminal-fill","eyeglasses","camera-fill"],
+                options = ["About me","Get in touch","Demoreels","Projects breakdowns","Coding/Development"],#,"Tutorials","Photography"],
+                icons = ["house","envelope","camera-reels-fill","list-stars","terminal-fill"],#,"eyeglasses","camera-fill"],
                 menu_icon = "cast", 
                 default_index = 0,
             )
@@ -61,8 +58,8 @@ class Main_Interface():
         elif selected == "Projects breakdowns":
             self.projects_breakdowns.create_panel()
 
-        # elif selected == "Coding/Development":
-        #     self.coding_dev.create_panel()
+        elif selected == "Coding/Development":
+            self.coding_dev.create_panel()
 
 class AboutMe_Widgets():
 
@@ -499,19 +496,40 @@ class Projects_Breakdowns():
                         st.video(link.split('\n')[0])
 
 class Coding_Dev():
+
     def create_panel(self):
         st.header('_CODING/DEVELOPMENT_ :', divider='red')
-        projects_data = {
-            "2024": ["Autodesk Maya OpenAI API"],
-            "2023": ["Eastern module", "Bake Manager Autodesk Maya/Renderman", "Nuke Camera Mapping Helper"],
-        }
-        for year, projects in projects_data.items():
-            st.subheader(f'_{year}_ :', divider='red')
-            column_sets = st.columns(len(projects))
+        subdirectories = [d for d in next(os.walk(DEV_PROJECTS))[1]]
+        year_subfolders_dict = {}
 
-            for col, project in zip(column_sets, projects):
-                with col:
-                    st.title(project)
+        for year_folder in subdirectories:
+            year_folder_path = os.path.join(DEV_PROJECTS, year_folder)
+            sub_folders = next(os.walk(year_folder_path))[1]
+            sub_folders.sort()
+            year_subfolders_dict[year_folder] = sub_folders
+
+        year_subfolders_dict = dict(sorted(year_subfolders_dict.items(), key=lambda item: item[0], reverse=True))
+
+        for year, subdir in year_subfolders_dict.items():
+            st.subheader(year, divider='red')
+            chunks = [subdir[i:i+4] for i in range(0, len(subdir), 4)]
+            for chunk in chunks:
+                columns = st.columns(4)
+                for col, project in zip(columns, chunk):
+                    with col:
+                        path = os.path.join(DEV_PROJECTS, year, project, "details.txt")
+                        with open(path, "r") as f :
+                            text  = f.read()
+                        expander = st.expander(project.split("_")[1] + " :")
+                        with expander :
+                            st.caption(text)
+
+                        video_path = os.path.join(DEV_PROJECTS, year, project, "link.txt")
+                        with open(video_path, "r") as f :
+                            link  = f.read()
+                        st.video(link)
+                    
+
 
 if __name__ == "__main__":
     main_app = Main_Interface()

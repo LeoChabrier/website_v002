@@ -1,0 +1,1 @@
+Tool developed for NukeX with Python, Qt Designer and PySide2, to help compositing artists to quickly create camera projections with card or external objects through 3D scene.

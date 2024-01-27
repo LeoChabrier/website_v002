@@ -1,0 +1,1 @@
+Application developed using OpenAI Whisper module, to transcribe long audio files from conferences etc into text files.
