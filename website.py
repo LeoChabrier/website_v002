@@ -529,8 +529,6 @@ class Coding_Dev():
                             link  = f.read()
                         st.video(link)
                     
-
-
 if __name__ == "__main__":
     main_app = Main_Interface()
     main_app.buttons()
