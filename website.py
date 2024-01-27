@@ -1,7 +1,6 @@
 
 import streamlit as st
 import streamlit_option_menu
-import streamlit.components.v1 as components
 from smtplib import SMTP
 from PIL import Image
 from pathlib import Path
