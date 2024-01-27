@@ -41,7 +41,7 @@ class Main_Interface():
         with st.sidebar:
             selected = streamlit_option_menu.option_menu(
                 menu_title = "Welcome !",
-                options = ["About me","Get in touch","Demoreels","Projects breakdowns","Coding/Development"],#,"Tutorials","Photography"],
+                options = ["About me","Get in touch","Demoreels","Projects breakdowns","Rnd/Development"],#,"Tutorials","Photography"],
                 icons = ["house","envelope","camera-reels-fill","list-stars","terminal-fill"],#,"eyeglasses","camera-fill"],
                 menu_icon = "cast", 
                 default_index = 0,
@@ -58,7 +58,7 @@ class Main_Interface():
         elif selected == "Projects breakdowns":
             self.projects_breakdowns.create_panel()
 
-        elif selected == "Coding/Development":
+        elif selected == "Rnd/Development":
             self.coding_dev.create_panel()
 
 class AboutMe_Widgets():
