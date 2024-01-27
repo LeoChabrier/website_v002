@@ -498,7 +498,7 @@ class Projects_Breakdowns():
 class Coding_Dev():
 
     def create_panel(self):
-        st.header('_CODING/DEVELOPMENT_ :', divider='red')
+        st.header('_RND/DEVELOPMENT_ :', divider='red')
         subdirectories = [d for d in next(os.walk(DEV_PROJECTS))[1]]
         year_subfolders_dict = {}
 
