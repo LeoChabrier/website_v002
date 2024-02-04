@@ -165,7 +165,7 @@ class AboutMe_Widgets():
 
         # --- SKILLS ---
         st.write('\n')
-        st.subheader("Sofwares, Languages and Rendering Engines 🤓👨‍💻 :") 
+        st.subheader("Softwares, Languages and Rendering Engines 🤓👨‍💻 :") 
         layout_column = st.columns(2)
         with layout_column[0]:
             st.write(
