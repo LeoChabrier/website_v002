@@ -67,7 +67,7 @@ class AboutMe_Widgets():
 
         NAME = "Léo Chabrier"
         DESCRIPTION = """
-        I'm a young Technical Director hardware/softwares, currently working at Add Fiction Paris.\n
+        I'm a young hardware/softwares Technical Director, currently working at Add Fiction Paris.\n
         I'm also a 3D generalist with a master degree in 3D animation and visual effects delivered by ESMA,
         specialised in lookdev/lighting/rendering/compositing/fx/cfx/pipeline/scripting/RND.
         """
