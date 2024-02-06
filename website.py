@@ -67,7 +67,7 @@ class AboutMe_Widgets():
 
         NAME = "Léo Chabrier"
         DESCRIPTION = """
-        I'm a junior 3D generalist, with a master degree in 3D animation and visual effects delivered by ESMA,
+        I'm a young 3D generalist and Technical Director hardware/softwares at Add Fiction Paris, with a master degree in 3D animation and visual effects delivered by ESMA,
         specialised in lookdev/lighting/rendering/compositing/fx/cfx/pipeline/scripting/RND.
         """
         EMAIL = "chabrierleo@outlook.fr"
